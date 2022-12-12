@@ -1,3 +1,44 @@
+:root{
+  --baseColor: #392B58;
+  --secondaryColor: #2D0320;
+  --accentColor: #645E9D;
+  --accentColor2: #6C969D;
+  --accentColor3: #99D5C9;
+}
+.title {
+  text-align: center;
+}
 body {
   font-family: verdana;
+  background-color: var(--baseColor);
+  color: var(--accentColor3); 
+}
+/* Flex columns. */
+body, .post, .info-Post, .description-Post {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.main-nav{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: var(--accentColor);
+  height: 10vh;
+  width: 100vw;
+}
+.post{
+  margin: 2rem;
+  background-color: var(--secondaryColor);
+}
+.title-price{
+  margin: 6px;
+  color: var(--accentColor2);
+}
+ .about-info{
+  display: flex;
+} 
+.info-Post, .description-Post, .messages-Post{
+  align-items: flex-start;
+  width: 30vw;
 }
