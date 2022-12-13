@@ -30,9 +30,9 @@ const getPost = async () => {
     <div>
       <h1 className='title'>Strangers Things</h1>
       <nav className='main-nav'>
-        <Link to='/posts'>Posts ({posts.length})</Link>
-        <Link to='/login'>Login</Link>
-        <Link to='/register'>Register</Link>
+        <Link to='/posts'><button>Posts ({posts.length})</button></Link>
+        <Link to='/login'><button>Login</button></Link>
+        <Link to='/register'><button>Register</button></Link>
       </nav>
       <Routes>
         <Route path='/posts' element= { <Post posts={ posts }/> }  />
