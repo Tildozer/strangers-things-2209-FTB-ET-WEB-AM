@@ -33,6 +33,7 @@ const Post = ({ posts }) => {
                             })
                           : null
                         }
+                        <a>Expand messages</a>
                       </div>
                     </div>
                   </div>
