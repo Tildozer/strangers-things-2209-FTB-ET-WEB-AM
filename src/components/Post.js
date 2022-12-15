@@ -8,7 +8,7 @@ const Post = ({ posts }) => {
           <div>
             {
               posts.map(post => {
-                console.log(post);
+                
                 return (
                   <div key={ post._id } className='post'>
                     <h1 className='title-price'>{ post.title }</h1>
@@ -24,16 +24,6 @@ const Post = ({ posts }) => {
                         <span>-created on: {post.createdAt.slice(0, 10)}</span>
                         <span>at: {post.createdAt.slice(11, 16)}</span>
                         &nbsp;
-                      </div>
-                      <div className='messages-Post'>
-                        <span>-Messages({post.messages.length}):</span>
-                        {
-                          post.messages.length ?
-                            post.messages.map(message => {
-                            })
-                          : null
-                        }
-                        <a>Expand messages</a>
                       </div>
                     </div>
                   </div>

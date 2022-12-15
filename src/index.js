@@ -10,34 +10,47 @@ import {
  Post,
  Login,
  Register,
-} from './components/index.js'
+ Nav,
+} from './components/index.js';
 
 const App = ()=> {
   const [posts, setPosts] = useState([]);
+
   
-const getPost = async () => {
+const getPosts = async () => {
   const data = await fetchPost();
   const posts = data.data.posts;
   setPosts(posts);
 }
   
   useEffect( ()=> {
-    getPost();
+    getPosts();
   }, [])
   
  
   return (
     <div>
       <h1 className='title'>Strangers Things</h1>
-      <nav className='main-nav'>
-        <Link to='/posts'>Posts ({posts.length})</Link>
-        <Link to='/login'>Login</Link>
-        <Link to='/register'> Register</Link>
-      </nav>
+      <Nav posts={ posts }/>
       <Routes>
-        <Route path='/posts' element= { <Post posts={ posts }/> }  />
-        <Route path='/login' element={ <Login />} />
-        <Route path='/register' element={ <Register />} />
+        <Route 
+          path='/posts' 
+          element= { 
+            <Post posts={ posts }/> 
+          }  
+        />
+        <Route 
+          path='/login' 
+          element={ 
+            <Login /> 
+          } 
+        />
+        <Route 
+          path='/register' 
+          element={ 
+            <Register /> 
+            } 
+        />
       </Routes> 
     </div>
 

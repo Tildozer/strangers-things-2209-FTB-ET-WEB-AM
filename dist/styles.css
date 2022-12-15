@@ -7,38 +7,100 @@
 }
 .title {
   text-align: center;
+  font-family: 'Mogra', Verdana, Tahoma, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--secondaryColor);
+  height: 11vh;
+  margin: 0%;
 }
 body {
-  font-family: verdana;
+  font-family: 'Farsan', Tahoma, sans-serif;
   background-color: var(--baseColor);
-  color: var(--accentColor3); 
+  color: var(--accentColor3);
+  margin: 0; 
 }
 /* Flex columns. */
-body, .post, .info-Post, .description-Post, .messages-Post {
+body, .post, .info-Post, .description-Post,
+.main-nav > a, .login-form, .register-form{
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 .main-nav{
   display: flex;
-  justify-content: space-around;
   align-items: center;
+  justify-content: flex-end;
   background-color: var(--accentColor);
-  height: 10vh;
+  height: 12vh;
   width: 100vw;
 }
-.post{
-  margin: 2rem;
+
+/* Navigation bar */
+.main-nav > a{
+  justify-content: center; 
+  color: var(--accentColor);
+  border: var(--accentColor) solid 2px;
+  border-radius: .5rem;
+  height: 10vh;
+  width: 10vw;
+}
+@media(max-width: 600){
+
+}
+.not-selected {
   background-color: var(--secondaryColor);
+  text-decoration: none;
+}
+.selected {
+  background-color: var(--accentColor2);
+}
+.main-nav > a:active{
+  background-color: var(--accentColor);
+  color: var(--secondaryColor);
+}
+/* End. */
+
+/* Post Page */
+.post{
+  margin: .5rem 2rem 2rem 2rem;
+  background-color: var(--secondaryColor);
+  border-radius: 1rem;
 }
 .title-price{
+  font-family: 'Mogra', Verdana, Tahoma, sans-serif;
   margin: 6px;
   color: var(--accentColor2);
 }
  .about-info{
   display: flex;
 } 
-.info-Post, .description-Post, .messages-Post{
+.info-Post, .description-Post{
   align-items: flex-start;
   width: 30vw;
 }
+/* End */
+
+/* Login Page / Register.
+ page both have just about the same css. */
+.login-form, .register-form{
+  justify-content: center;
+  height: 70vh;
+}
+.login-form > h1, .register-form > h1 {
+  font-family: 'Mogra', Verdana, Tahoma, sans-serif;
+}
+.user-name, .password{
+  width: 30vw;
+  height: 5vh;
+  font-size: x-large;
+  font-family: 'Farsan', Tahoma, sans-serif;
+  margin: 1rem;
+}
+.register-account{
+  color: var(--accentColor2);
+  margin: .5rem;
+}
+/* End. */
+
