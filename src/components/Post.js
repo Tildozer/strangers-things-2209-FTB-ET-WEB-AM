@@ -1,11 +1,39 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
+import { loggedIn } from '../api/index.js';
 
-const Post = ({ posts }) => {
+const Post = (props) => {
+  const { posts, token, setUser, user } = props;
+  const [serachPhrase, setSearchPhrase] = useState([]);
+  
+  const loggedInCheck = async () => {
+    if(token){
+      const userInfo = await loggedIn(token)
+      setUser(userInfo)
+    };
+  }
+  useEffect(() => {
+    loggedInCheck();
+  }, []);
+
+  // console.log(posts)
+  // console.log(user)
   return (
     <Fragment>
       {
         posts.length ?
           <div>
+            <form className='post-search'>
+            <h1>Posts</h1>
+            <div>
+              <input
+                placeholder='search posts...'
+                onChange={ev => {
+                  setSearchPhrase(ev.target.value);
+                }}
+                value={ serachPhrase }
+              />
+            </div>
+            </form>
             {
               posts.map(post => {
                 
@@ -14,17 +42,28 @@ const Post = ({ posts }) => {
                     <h1 className='title-price'>{ post.title }</h1>
                     <h2 className='title-price'>Price: { post.price }</h2>
                     <div className='about-info'>
-                      <div className='info-Post'>
+                      <div className='post-info'>
                         <span>-Post by: { post.author.username }</span>
                         <span>-Location: { post.location }</span>
                         <span>-Will I deliver?: { post.willDeliver ? 'Yes!': 'No, sorry bud.'}</span>
                       </div>
-                      <div className='description-Post'>
+                      <div className='post-description'>
                         <span>-Description: { post.description }</span>
                         <span>-created on: {post.createdAt.slice(0, 10)}</span>
                         <span>at: {post.createdAt.slice(11, 16)}</span>
                         &nbsp;
-                      </div>
+                        </div>
+                        {
+                          token ?
+                            post.author._id === user._id ?
+                              <div className='post-edit'>
+                                <button>Edit</button>
+                              </div>
+                            : <div className='post-message'>
+                                <button>Send message</button>
+                              </div>
+                          : null
+                        }
                     </div>
                   </div>
                 )
@@ -32,7 +71,7 @@ const Post = ({ posts }) => {
             }
           </div>
         : null
-      }    
+      };    
     </Fragment>
   );
 }

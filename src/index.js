@@ -31,8 +31,6 @@ const App = ()=> {
   useEffect( ()=> {
     getPosts();
   }, [])
-
-  console.log(user);
  
   return (
     <div>
@@ -50,6 +48,9 @@ const App = ()=> {
           element= { 
             <Post 
               posts={ posts }
+              token={ token }
+              setUser={ setUser }
+              user={ user }
             /> 
           }  
         />

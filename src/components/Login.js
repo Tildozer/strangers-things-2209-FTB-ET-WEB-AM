@@ -3,7 +3,7 @@ import { Link, redirect } from 'react-router-dom';
 import{ login } from '../api/index.js'
 
 const Login = (props) => {
-  const { setUser } = props
+  const { setUser, user } = props
   const [loginUsername, setLoginUsername] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
   const [wrongLogin, setWrongLogin] = useState(false);
@@ -16,13 +16,24 @@ const Login = (props) => {
         const token = data.data.token;
         const user = data.data;
         setUser(user);
-        window.localStorage.setItem('token', token)
+        window.localStorage.setItem('token', token);
         setWrongLogin(false);
       } else {
         setLoginError(data.error.message);
         setWrongLogin(true);
       }
     });
+  }
+
+  const handleSubmit = ev => {
+    ev.preventDefault();
+    const loginObj = { 
+      'user' : { 
+        'username': loginUsername,
+        'password': loginPassword,
+      }
+    }
+    addUserkey(loginObj);
   }
 
   useEffect(() => {
@@ -36,16 +47,7 @@ const Login = (props) => {
     <div>
       <form 
         className='login-form'
-        onSubmit={ ev => {
-          ev.preventDefault();
-          const loginObj = { 
-            'user' : { 
-              'username': loginUsername,
-              'password': loginPassword,
-            }
-          }
-          addUserkey(loginObj)
-        }}
+        onSubmit={ev => handleSubmit(ev)}
       >
         <h1>Welcome Stranger!</h1>
         <h3>Please submit your info below to login.</h3>

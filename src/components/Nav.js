@@ -10,6 +10,13 @@ const Nav = (props) => {
   return (
     <nav className='main-nav'>
       <Link to='/posts' className={ pathName === '/posts' ? 'selected' : 'not-selected' }>Posts ({posts.length})</Link>
+      
+      {
+        token ? 
+          <Link to='/dashboard' className={pathName === '/dashboard' ? 'selected' : 'not-selected' }>Dashboard</Link>
+        : null
+      }
+
       {
         token ?
           <Link to='/logout' className="not-selected">LogOut</Link> 

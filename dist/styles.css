@@ -22,12 +22,26 @@ body {
   margin: 0; 
 }
 /* Flex columns. */
-body, .post, .info-Post, .description-Post,
-.main-nav > a, .login-form, .register-form{
+body, .post, .post-info, .post-description,
+.main-nav > a, .login-form, .register-form,
+.dashboard, .post-search{
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
+button{
+  font-family: 'Farsan', Tahoma, sans-serif;
+  font-size: x-large;
+  color: var(--accentColor2);
+  background-color: var(--accentColor);
+  border: solid 2px var(--secondaryColor);
+  margin: .5rem;
+}
+button:hover{
+  cursor: pointer;
+}
+
 .main-nav{
   display: flex;
   align-items: center;
@@ -45,9 +59,6 @@ body, .post, .info-Post, .description-Post,
   border-radius: .5rem;
   height: 10vh;
   width: 10vw;
-}
-@media(max-width: 600){
-
 }
 .not-selected {
   background-color: var(--secondaryColor);
@@ -76,8 +87,14 @@ body, .post, .info-Post, .description-Post,
  .about-info{
   display: flex;
 } 
-.info-Post, .description-Post{
+.post-info, .post-description{
   align-items: flex-start;
+  width: 30vw;
+}
+.post-message, .post-edit{
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 30vw;
 }
 /* End */
@@ -101,6 +118,12 @@ body, .post, .info-Post, .description-Post,
 .register-account{
   color: var(--accentColor2);
   margin: .5rem;
+}
+/* End. */
+
+/* dashboard */
+.dash-greeting{
+  display: flex;
 }
 /* End. */
 
