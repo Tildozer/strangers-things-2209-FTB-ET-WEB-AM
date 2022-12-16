@@ -1,4 +1,3 @@
-
 const MAIN_URL = `https://strangers-things.herokuapp.com/api/2209-FTB-ET-WEB-AM/`;
 
 export const fetchPost = async () => {
@@ -8,7 +7,7 @@ export const fetchPost = async () => {
   .catch(err => console.error(err));
 }
 
-export const PostAPost = async (submitObj, userToken) => {
+export const postAPost = async (submitObj, userToken) => {
   return (
     await fetch(`${MAIN_URL}posts`, {
       method: 'POST',
@@ -59,50 +58,6 @@ export const deletePost = async (postId, userToken) => {
     })
     .then(res => res.json)
     .then(_ => console.log('Data has been deleted.'))
-    .catch(err => console.error(err))
-  );
-}
-
-export const login = async (loginObj) => {
-  return (
-    await fetch(`${MAIN_URL}users/login`, {
-      method: "POST",
-      headers: {
-        'Content-Type' : 'Application/json'
-      },
-      body : JSON.stringify(loginObj)
-    })
-    .then( res => res.json())
-    .then( data =>  data)
-    .catch(err => console.error(err))
-  )
-}
-
-export const loggedIn = async (userToken) => {
-  return (
-    await fetch(`${MAIN_URL}users/me`, {
-      headers: {
-        'Content-type': 'Application/json',
-        'Authorization' : `Bearer ${userToken}`,
-      },
-    })
-    .then(res => res.json())
-    .then(data => console.log(data))
-    .catch(err => console.error(err))
-  );
-}
-
-export const register = async (registerObj) => {
-  return (
-    await fetch(`${MAIN_URL}users/register`, {
-      method: 'POST',
-      headers: {
-        'Content-Type' : 'Application/json',
-      },
-      body: JSON.stringify(registerObj),
-    })
-    .then(res => res.json)
-    .then(data => console.log(data))
     .catch(err => console.error(err))
   );
 }

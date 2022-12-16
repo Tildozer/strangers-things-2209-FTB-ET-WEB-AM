@@ -1,40 +1,44 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import{
-  login,
-  loggedIn,
-} from '../api/fetchCalls.js'
+import React, { useState, useEffect } from 'react';
+import { Link, redirect } from 'react-router-dom';
+import{ login } from '../api/index.js'
 
 const Login = (props) => {
+  const { setUser, user, } = props
   const [loginUsername, setLoginUsername] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
   const [wrongLogin, setWrongLogin] = useState(false);
   const [loginError, setLoginError] = useState('');
   
+  const addUserkey = (loginObj) => {
+    login(loginObj)
+    .then(data => {
+      if(data.success){
+        const token = data.data.token;
+        const user = data.data;
+        setUser(user);
+        window.localStorage.setItem('token', token)
+        setWrongLogin(false);
+      } else {
+        setLoginError(data.error.message);
+        setWrongLogin(true);
+      }
+    });
+  }
+
   return (
+    
     <div>
       <form 
         className='login-form'
         onSubmit={ ev => {
           ev.preventDefault();
-          const username = ev.target[0].value;
-          const password = ev.target[1].value;
           const loginObj = { 
             'user' : { 
-              'username': username,
-              'password': password,
+              'username': loginUsername,
+              'password': loginPassword,
             }
           }
-          login(loginObj)
-          .then(data => {
-            if(data.success){
-              loggedIn(data.data.token);
-              setWrongLogin(false);
-            } else {
-              setLoginError(data.error.message);
-              setWrongLogin(true);
-            }
-          });
+          addUserkey(loginObj)
         }}
       >
         <h1>Welcome Stranger!</h1>

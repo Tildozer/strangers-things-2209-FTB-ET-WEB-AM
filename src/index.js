@@ -1,55 +1,91 @@
 import ReactDOM from 'react-dom/client';
 import React, { useState, useEffect } from 'react';
-import { HashRouter, Routes, Route, Link} from 'react-router-dom';
+import { HashRouter, Routes, Route, Link, Navigate} from 'react-router-dom';
 
 import {
-  fetchPost,
-} from './api/fetchCalls.js';
+  fetchPost, 
+  loggedIn,
+} from './api/index.js';
 
 import {
  Post,
  Login,
  Register,
  Nav,
+ Dashboard,
 } from './components/index.js';
 
 const App = ()=> {
   const [posts, setPosts] = useState([]);
-
+  const [user, setUser] = useState({});
   
-const getPosts = async () => {
-  const data = await fetchPost();
-  const posts = data.data.posts;
-  setPosts(posts);
-}
+  const token = window.localStorage.getItem('token');
+
+  const getPosts = async () => {
+    const data = await fetchPost();
+    const posts = data.data.posts;
+    setPosts(posts);
+  }
   
   useEffect( ()=> {
     getPosts();
   }, [])
-  
+
+  console.log(user);
  
   return (
     <div>
       <h1 className='title'>Strangers Things</h1>
-      <Nav posts={ posts }/>
+      <Nav 
+        posts={ posts }
+        token={ token }
+      />
       <Routes>
+        <Route exact path='/'
+          element={ <Navigate to='/login'/> }
+        />
         <Route 
           path='/posts' 
           element= { 
-            <Post posts={ posts }/> 
+            <Post 
+              posts={ posts }
+            /> 
           }  
         />
         <Route 
           path='/login' 
           element={ 
-            <Login /> 
+            token ?
+              <Navigate to='/dashboard'/>
+            : <Login
+                setUser={ setUser }
+                user={ user }
+              /> 
           } 
         />
         <Route 
           path='/register' 
           element={ 
-            <Register /> 
-            } 
+            token ?
+              <Navigate to='/dashboard'/>
+            : <Register 
+                setUser={ setUser }
+                user={ user }
+              /> 
+          } 
+        />
+        <Route
+          path='/dashboard'
+          element={
+            token ?
+              <Dashboard
+                user={ user }
+                setUser={ setUser }
+                loggedIn={ loggedIn }
+                token={ token }
+              />
+            : <Navigate to='/login'/>
+          }
         />
       </Routes> 
     </div>
