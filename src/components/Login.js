@@ -3,7 +3,7 @@ import { Link, redirect } from 'react-router-dom';
 import{ login } from '../api/index.js'
 
 const Login = (props) => {
-  const { setUser, user, } = props
+  const { setUser } = props
   const [loginUsername, setLoginUsername] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
   const [wrongLogin, setWrongLogin] = useState(false);
@@ -25,6 +25,12 @@ const Login = (props) => {
     });
   }
 
+  useEffect(() => {
+    const token = window.localStorage.getItem('token');
+    if(!token){
+      setUser({});
+    }
+  }, [])
   return (
     
     <div>

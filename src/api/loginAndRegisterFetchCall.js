@@ -35,10 +35,6 @@ export const loggedIn = async (userToken) => {
   );
 }
 
-export const logout = () => {
-  window.localStorage.removeItem('token');
-}
-
 export const registerUser = async (registerObj) => {
   return (
     await fetch(`${MAIN_URL}users/register`, {

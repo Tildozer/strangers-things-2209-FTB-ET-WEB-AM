@@ -10,6 +10,7 @@ import {
 import {
  Post,
  Login,
+ Logout,
  Register,
  Nav,
  Dashboard,
@@ -86,6 +87,10 @@ const App = ()=> {
               />
             : <Navigate to='/login'/>
           }
+        />
+        <Route 
+          path='/logout'
+          element={ <Logout /> }
         />
       </Routes> 
     </div>

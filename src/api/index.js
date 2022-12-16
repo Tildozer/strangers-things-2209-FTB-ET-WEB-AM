@@ -8,6 +8,5 @@ deletePost
 export {
 login,
 loggedIn,
-logout,
 registerUser,
 } from './loginAndRegisterFetchCall.js'

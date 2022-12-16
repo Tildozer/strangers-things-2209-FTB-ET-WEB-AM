@@ -12,7 +12,7 @@ const Nav = (props) => {
       <Link to='/posts' className={ pathName === '/posts' ? 'selected' : 'not-selected' }>Posts ({posts.length})</Link>
       {
         token ?
-          <Link to='/post' className="not-selected">LogOut</Link> 
+          <Link to='/logout' className="not-selected">LogOut</Link> 
         : <Link to='/login' className={ pathName === '/login' ? 'selected' : 'not-selected' }>Login</Link>
       }
     </nav>
