@@ -48,9 +48,10 @@ const App = ()=> {
           element= { 
             <Post 
               posts={ posts }
+              getPosts={ getPosts }
               token={ token }
-              setUser={ setUser }
               user={ user }
+              setUser={ setUser }
             /> 
           }  
         />

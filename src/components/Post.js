@@ -2,7 +2,7 @@ import React, { Fragment, useState, useEffect } from 'react';
 import { loggedIn } from '../api/index.js';
 
 const Post = (props) => {
-  const { posts, token, setUser, user } = props;
+  const { posts, getPosts, token, setUser, user } = props;
   const [serachPhrase, setSearchPhrase] = useState([]);
   
   const loggedInCheck = async () => {

@@ -1,12 +1,9 @@
 import React, { useEffect, useState, Fragment } from 'react';
+import { CreatePost } from './index.js'
 
 const Dashboard = (props) => {
   const { user, setUser, loggedIn, token } = props
-  const [makeNewePost, setMakeNewPost] = useState(false)
-
-  const handleSubmit = ev => {
-    ev.preventDefault();
-  }
+  const [makeNewePost, setMakeNewPost] = useState(false);
 
   useEffect(() => {
     loggedIn(token)
@@ -15,19 +12,32 @@ const Dashboard = (props) => {
   return (
     user._id ?
       <div className='dashboard'>
-        <h1 className='dash-greeting'>Hello { user.username }! welcome back, please enjoy your time here! 
-        
-        <form
-          onSubmit={ev => handleSubmit(ev) }>
-          <button className='make-post-redirect'>Create new post</button>
-          </form>
+        <h1>Hello { user.username }! welcome back, please enjoy your time here! 
           </h1>
           {
-            makeNewePost ? 
-              <form>
-                
+            makeNewePost ?
+            <Fragment>
+              <button
+                className='exit-make-post'
+                onClick={_ => setMakeNewPost(false)}
+              >
+                Exit post creation.
+              </button>
+              <CreatePost 
+                setMakeNewPost={ setMakeNewPost }
+                token={ token }
+              />
+              <form
+                onSubmit={ev => handleSubmit(ev) }
+              >
               </form>
-            : null
+            </Fragment> 
+            : <button 
+                className='make-post'
+                onClick={_ => setMakeNewPost(true)}
+              >
+                Create new Post
+              </button>
           }
           <div className='dash-post'>
             {

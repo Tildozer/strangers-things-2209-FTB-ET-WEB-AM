@@ -24,7 +24,7 @@ body {
 /* Flex columns. */
 body, .post, .post-info, .post-description,
 .main-nav > a, .login-form, .register-form,
-.dashboard, .post-search{
+.dashboard, .post-search, .create-post{
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -122,8 +122,11 @@ button:hover{
 /* End. */
 
 /* dashboard */
-.dash-greeting{
-  display: flex;
+.create-post > input{
+  margin: .5rem;
+}
+.create-post-title{
+  align-self: flex-start;
 }
 /* End. */
 
