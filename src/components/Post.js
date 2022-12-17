@@ -13,6 +13,7 @@ const Post = (props) => {
   }
   useEffect(() => {
     loggedInCheck();
+    getPosts();
   }, []);
 
   // console.log(posts)

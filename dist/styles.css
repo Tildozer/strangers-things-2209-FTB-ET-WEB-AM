@@ -24,7 +24,8 @@ body {
 /* Flex columns. */
 body, .post, .post-info, .post-description,
 .main-nav > a, .login-form, .register-form,
-.dashboard, .post-search, .create-post{
+.dashboard, .post-search, .create-post,
+.dash-post-container, .dash-messages{
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -125,8 +126,19 @@ button:hover{
 .create-post > input{
   margin: .5rem;
 }
-.create-post-title{
-  align-self: flex-start;
+.dashboard-post {
+  background-color: var(--secondaryColor);
+  border-radius: .5rem;
+  padding: .5rem;
+  width: 50vw
+}
+
+.dashboard-post > * {
+  margin: 0;
+}
+.dashboard-title{
+  color: var(--accentColor2);
+  width: 100vw;
 }
 /* End. */
 

@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { Navigate } from 'react-router-dom';
-import { postAPost } from '../api';
+import { loggedIn, postAPost } from '../api';
 
 const CreatePost = (props) => {
-  const { setMakeNewPost, token } = props
+  const { setMakeNewPost, token, setUser } = props
   const [location, setLocation] = useState('');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -24,6 +24,9 @@ const CreatePost = (props) => {
       }
     }
     postAPost(postObj, token)
+    .then(_ => loggedIn(token))
+    .then(data => setUser(data))
+    setMakeNewPost(false);
   }
 
   return (

@@ -56,8 +56,8 @@ export const deletePost = async (postId, userToken) => {
         'Authorization' : `Bearer ${userToken}`
       }, 
     })
-    .then(res => res.json)
-    .then(_ => console.log('Data has been deleted.'))
+    .then(res => res.json())
+    .then(data => console.log(data))
     .catch(err => console.error(err))
   );
 }
