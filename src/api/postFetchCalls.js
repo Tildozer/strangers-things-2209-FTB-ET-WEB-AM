@@ -23,7 +23,7 @@ export const postAPost = async (submitObj, userToken) => {
   );
 }
 
-export const updatePost = async (postEditObj, userToken, ) => {
+export const updatePost = async (postEditObj, userToken, postId ) => {
   return (
     await fetch(`${MAIN_URL}posts/${postId}`, {
       method: 'PATCH',

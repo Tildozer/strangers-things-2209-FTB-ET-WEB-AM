@@ -30,7 +30,7 @@ body, .post, .post-info, .post-description,
   flex-direction: column;
   align-items: center;
 }
-
+/* buttons */
 button{
   font-family: 'Farsan', Tahoma, sans-serif;
   font-size: x-large;
@@ -42,7 +42,29 @@ button{
 button:hover{
   cursor: pointer;
 }
+button:active{
+  background-color: var(--accentColor2);
+  color: var(--accentColor);
+}
 
+.delete-button{
+  background-color: rgb(150, 10, 10);
+  color: var(--secondaryColor);
+  padding: 0 .5rem 0 .5rem;
+}
+.delete-button:active{
+ background-color: rgb(255, 81, 81);
+ color: var(--secondaryColor);
+}
+.edit-button{
+  background-color: var(--accentColor3);
+  color: var(--baseColor);
+  padding: 0 1rem 0 1rem;
+}
+.edit-button:active{
+  color: var(--secondaryColor);
+}
+/* End. */
 .main-nav{
   display: flex;
   align-items: center;
@@ -138,7 +160,7 @@ button:hover{
 }
 .dashboard-title{
   color: var(--accentColor2);
-  width: 100vw;
+  width: 90vw;
 }
 /* End. */
 

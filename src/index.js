@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom/client';
 import React, { useState, useEffect } from 'react';
-import { HashRouter, Routes, Route, Link, Navigate} from 'react-router-dom';
+import { HashRouter, Routes, Route, Navigate} from 'react-router-dom';
 
 import {
   fetchPost, 
@@ -14,11 +14,14 @@ import {
  Register,
  Nav,
  Dashboard,
+ EditPost,
 } from './components/index.js';
 
 const App = ()=> {
   const [posts, setPosts] = useState([]);
   const [user, setUser] = useState({});
+  const [editAPost, setEditAPost] = useState(false);
+  const [editPostObj, setEditPostObj] = useState({});
   
   const token = window.localStorage.getItem('token');
 
@@ -36,7 +39,6 @@ const App = ()=> {
     <div>
       <h1 className='title'>Strangers Things</h1>
       <Nav 
-        posts={ posts }
         token={ token }
       />
       <Routes>
@@ -52,6 +54,10 @@ const App = ()=> {
               token={ token }
               user={ user }
               setUser={ setUser }
+              setEditAPost={ setEditAPost }
+              editAPost={ editAPost }
+              setEditPostObj={ setEditPostObj}
+              editPostObj={ editPostObj }
             /> 
           }  
         />
@@ -86,6 +92,10 @@ const App = ()=> {
                 setUser={ setUser }
                 loggedIn={ loggedIn }
                 token={ token }
+                setEditAPost={ setEditAPost }
+                editAPost={ editAPost }
+                setEditPostObj={ setEditPostObj}
+                editPostObj={ editPostObj }
               />
             : <Navigate to='/login'/>
           }
@@ -94,6 +104,10 @@ const App = ()=> {
           path='/logout'
           element={ <Logout /> }
         />
+        <Route
+          path='/edit-post'
+          element={ <EditPost />}
+        /> 
       </Routes> 
     </div>
 

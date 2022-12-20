@@ -1,16 +1,14 @@
 import React from "react";
 import { useLocation, Link } from "react-router-dom";
-import { logout } from "../api/index.js";
 
 const Nav = (props) => {
-  const { posts, token,  } = props
+  const { token, } = props
   const location = useLocation();
-  const pathName = location.pathname
+  const pathName = location.pathname;
 
   return (
     <nav className='main-nav'>
-      <Link to='/posts' className={ pathName === '/posts' ? 'selected' : 'not-selected' }>Posts ({posts.length})</Link>
-      
+      <Link to='/posts' className={ pathName === '/posts' ? 'selected' : 'not-selected' }>Posts</Link>
       {
         token ? 
           <Link to='/dashboard' className={pathName === '/dashboard' ? 'selected' : 'not-selected' }>Dashboard</Link>

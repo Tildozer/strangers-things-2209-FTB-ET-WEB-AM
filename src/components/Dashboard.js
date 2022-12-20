@@ -1,22 +1,35 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import { deletePost } from '../api/postFetchCalls.js';
-import { CreatePost } from './index.js';
+import { CreatePost, EditPost } from './index.js';
 
 const Dashboard = (props) => {
-  const { user, setUser, loggedIn, token } = props;
-  const [makeNewePost, setMakeNewPost] = useState(false);
+  const { user, setUser, loggedIn, token, setEditAPost, editAPost, setEditPostObj, editPostObj } = props;
+  const [makeNewPost, setMakeNewPost] = useState(false);
+  
+  const handleDelete = async (ev) => {
+    const id = ev.target.value
+    await deletePost(id, token)
+      .then( _ => loggedIn(token))
+      .then(data => setUser(data));
+  }
+
+  const handleEdit = (ev, post) => {
+    setEditAPost(true);
+    setEditPostObj(post);
+  }
 
   useEffect(() => {
     loggedIn(token)
     .then(user => setUser(user));
   }, [])
+
   return (
     user._id ?
       <div className='dashboard'>
-        <h1>Hello { user.username }! welcome back, please enjoy your time here! 
+        <h1 className='dashboard-title'>Hello { user.username }! welcome back, please enjoy your time here! 
           </h1>
           {
-            makeNewePost ?
+            makeNewPost ?
               <Fragment>
                 <button
                   className='exit-make-post'
@@ -29,7 +42,24 @@ const Dashboard = (props) => {
                   token={ token }
                   setUser={ setUser }
                 />
-              </Fragment> 
+              </Fragment>
+              // start of second if statment.
+            : editAPost ?
+              <Fragment>
+                <button
+                  className='exit-make-post'
+                  onClick={_ => setEditAPost(false)}
+                >
+                  Exit post edit.
+                </button>
+                <EditPost 
+                  editPostObj={ editPostObj }
+                  setEditPostObj={ setEditPostObj }
+                  setEditAPost={ setEditAPost }
+                  token={ token }
+                  setUser={ setUser }
+                /> 
+              </Fragment>
             : <button 
                 className='make-post'
                 onClick={_ => setMakeNewPost(true)}
@@ -42,9 +72,9 @@ const Dashboard = (props) => {
               {
                 user.posts.length ?
                   user.posts.filter(post => post.active).length ?
-                    user.posts.filter(post => post.active).map(post => {
+                    user.posts.filter(post => post.active).map((post, idx) => {
                       return (
-                        <div key={ post._id }>
+                        <div  key={ post._id }>
                         <div className='dashboard-post'>
                           <h3>{post.title}</h3>
                           <h4>Price: { post.price }</h4>
@@ -55,16 +85,26 @@ const Dashboard = (props) => {
                             <span>at: {post.createdAt.slice(11, 16)}</span>
                           </div>
                           <div>
-                            <button>Edit</button>
-                            <button
-                              onClick={async _ => {
-                                await deletePost(post._id, token)
-                                .then( _ => loggedIn(token))
-                                .then(data => setUser(data))
-                              }}
-                            >
-                              Delete
-                            </button>
+                            {
+                            editAPost || makeNewPost ?
+                              null
+                            : <Fragment>
+                              <button
+                                className='edit-button'
+                                onClick={ ev => handleEdit(ev, post) }
+                                value={ post._id }
+                              >
+                                Edit
+                              </button>
+                              <button
+                                className='delete-button'
+                                onClick={ev => handleDelete(ev)}
+                                value={ post._id }
+                              >
+                                Delete
+                              </button>
+                            </Fragment>
+                            }
                           </div>
                         </div>
                       </div>

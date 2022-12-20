@@ -10,9 +10,8 @@ const CreatePost = (props) => {
   const [price, setPrice] = useState('');
 
   
-  const handleSubmit = ev => {
+  const handlePostSubmit = ev => {
     ev.preventDefault();
-    console.log(ev.target[4].value)
     const deliver = ev.target[4].value;
     const postObj = {
       post: {
@@ -32,7 +31,7 @@ const CreatePost = (props) => {
   return (
     <form 
       className='create-post'
-      onSubmit={ev => handleSubmit(ev)}
+      onSubmit={ev => handlePostSubmit(ev)}
     >
         <div className='create-post-title'>Title :</div>
           <input 
