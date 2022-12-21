@@ -23,7 +23,7 @@ const Post = (props) => {
     }
   const handlePostClick = (post) => {
     setSinglePost(post)
-    navigate(`/post/${ post._id }`);
+    navigate(`/send-message/${ post._id }`);
   }
 
   useEffect(() => {
@@ -75,7 +75,7 @@ const Post = (props) => {
                         </Fragment>
                       : null
                     }  
-                    <div className='post' onClick={ev => handlePostClick(post)}>
+                    <div className='post'>
                       <h1 className='title-price'>{ post.title }</h1>
                       <h2 className='title-price'>Price: { post.price }</h2>
                       <div className='about-info'>
@@ -86,7 +86,7 @@ const Post = (props) => {
                         </div>
                         <div className='post-description'>
                           <span>-Description: { post.description }</span>
-                          <span>-created on: {post.createdAt.slice(0, 10)}</span>
+                          <span>-Created on: {post.createdAt.slice(0, 10)}</span>
                           <span>at: {post.createdAt.slice(11, 16)}</span>
                           &nbsp;
                         </div>
@@ -107,7 +107,11 @@ const Post = (props) => {
                                 }
                               </div>
                             : <div className='post-message'>
-                                <button>Send message</button>
+                                <button 
+                                  onClick={ev => handlePostClick(post)}
+                                >
+                                  Send message
+                                </button>
                               </div>
 
                           : null

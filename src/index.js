@@ -15,7 +15,7 @@ import {
  Nav,
  Dashboard,
  EditPost,
- SinglePost,
+ SendMessage,
 } from './components/index.js';
 
 const App = ()=> {
@@ -38,9 +38,8 @@ const App = ()=> {
 
   useEffect( ()=> {
     getPosts();
-    setSinglePost({});
   }, [])
-  console.log(singlePost._id)
+
   return (
     <div>
       <h1 className='title'>Strangers Things</h1>
@@ -120,8 +119,14 @@ const App = ()=> {
           element={ <EditPost />}
         />
             <Route 
-              path={ `/post/${ singlePost._id }` }
-              element={ <SinglePost />}
+              path={ `/send-message/${ singlePost._id }` }
+              element={ <SendMessage
+                  singlePost={ singlePost }
+                  setSinglePost={ setSinglePost }
+                  posts={ posts }
+                  getPosts={ getPosts }
+                />
+              }
             />
       </Routes> 
     </div>

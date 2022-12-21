@@ -165,3 +165,12 @@ button:active{
 }
 /* End. */
 
+/* SendMessage */
+.message-input{
+  font-family: 'Farsan', Tahoma, sans-serif;
+  display: flex;
+  height: 30vh;
+  width: 20vw;
+}
+/* End. */
+
