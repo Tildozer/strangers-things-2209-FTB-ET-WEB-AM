@@ -1,10 +1,8 @@
 import React from "react";
-import { useLocation, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Nav = (props) => {
-  const { token, } = props
-  const location = useLocation();
-  const pathName = location.pathname;
+  const { token, pathName } = props
 
   return (
     <nav className='main-nav'>

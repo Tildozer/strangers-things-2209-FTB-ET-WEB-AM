@@ -7,7 +7,6 @@ const Dashboard = (props) => {
   const [makeNewPost, setMakeNewPost] = useState(false);
   
   const handleDelete = async (ev) => {
-    const id = ev.target.value
     await deletePost(id, token)
       .then( _ => loggedIn(token))
       .then(data => setUser(data));
@@ -21,6 +20,7 @@ const Dashboard = (props) => {
   useEffect(() => {
     loggedIn(token)
     .then(user => setUser(user));
+    setEditAPost(false);
   }, [])
 
   return (
@@ -92,14 +92,12 @@ const Dashboard = (props) => {
                               <button
                                 className='edit-button'
                                 onClick={ ev => handleEdit(ev, post) }
-                                value={ post._id }
                               >
                                 Edit
                               </button>
                               <button
                                 className='delete-button'
                                 onClick={ev => handleDelete(ev)}
-                                value={ post._id }
                               >
                                 Delete
                               </button>

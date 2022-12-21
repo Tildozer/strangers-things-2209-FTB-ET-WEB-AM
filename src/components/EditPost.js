@@ -2,7 +2,7 @@ import React, {useEffect, useState, } from 'react'
 import { loggedIn, updatePost } from '../api';
 
 const EditPost = (props) => {
-    const { editPostObj, setEditPostObj, setEditAPost, token, setUser } = props;
+    const { editPostObj, setEditPostObj, setEditAPost, token, setUser, getPosts, pathName } = props;
     const [editTitle, setEditTitle] = useState('');
     const [editDescription, setEditDescription] = useState('');
     const [editPrice, setEditPrice] = useState('');
@@ -10,17 +10,22 @@ const EditPost = (props) => {
 
     const handleSubmit = async ev => {
       ev.preventDefault();
+      const deliver = ev.target[4].value;
       const newPost = {
         post: {
           'title': editTitle ? editTitle : editPostObj.title,
           'description': editDescription ? editDescription : editPostObj.description,
           'price' : editPrice ? editPrice : editPostObj.price,
           'location' : editLocation ? editLocation : editPostObj.location,
+          'willDeliver': deliver,
         }
       }
       await updatePost(newPost, token, editPostObj._id)
       .then(_ => loggedIn(token))
       .then(data => setUser(data));
+      if(pathName === '/posts'){
+        getPosts();
+      }
       setEditAPost(false);
       setEditPostObj({});
     }
@@ -31,7 +36,6 @@ const EditPost = (props) => {
       setEditPrice(`${editPostObj.price}`);
       setEditLocation(`${editPostObj.location}`);
     }, []);
-
   return (
     <form 
       className='create-post'

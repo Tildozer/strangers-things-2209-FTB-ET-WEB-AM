@@ -1,10 +1,13 @@
 import React, { Fragment, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { loggedIn } from '../api/index.js';
 import EditPost from './EditPost.js';
 
 const Post = (props) => {
-  const { posts, getPosts, token, setUser, user, setEditAPost, editAPost, setEditPostObj, editPostObj } = props;
+  const { posts, getPosts, token, setUser, user, setEditAPost,
+    editAPost, setEditPostObj, editPostObj, pathName, setSinglePost, singlePost } = props;
   const [serachPhrase, setSearchPhrase] = useState([]);
+  const navigate = useNavigate()
   
   const loggedInCheck = async () => {
     if(token){
@@ -18,10 +21,15 @@ const Post = (props) => {
     setEditAPost(true);
     setEditPostObj(post)
     }
+  const handlePostClick = (post) => {
+    setSinglePost(post)
+    navigate(`/post/${ post._id }`);
+  }
 
   useEffect(() => {
     loggedInCheck();
     getPosts();
+    setEditAPost(false);
   }, []);
 
   // console.log(posts)
@@ -45,7 +53,6 @@ const Post = (props) => {
             </form>
             {
               posts.map(post => {
-                console.log(post)
                 return (
                   <Fragment key={ post._id }>
                     {
@@ -62,11 +69,13 @@ const Post = (props) => {
                             setEditAPost={ setEditAPost }
                             token={ token }
                             setUser={ setUser }
+                            pathName={ pathName }
+                            getPosts={ getPosts }
                           />
                         </Fragment>
                       : null
                     }  
-                    <div  className='post'>
+                    <div className='post' onClick={ev => handlePostClick(post)}>
                       <h1 className='title-price'>{ post.title }</h1>
                       <h2 className='title-price'>Price: { post.price }</h2>
                       <div className='about-info'>
@@ -85,13 +94,17 @@ const Post = (props) => {
                           token ?
                             post.author._id === user._id ?
                               <div className='post-edit'>
-                                <button 
-                                  className='edit-button'
-                                  onClick={ ev => handleEdit(ev, post)}
-                                  value={ post._id }
-                                >
-                                  Edit
-                                </button>
+                                {
+                                  editAPost ?
+                                    null
+                                  : <button 
+                                      className='edit-button'
+                                      onClick={ ev => handleEdit(ev, post)}
+                                      value={ post._id }
+                                    >
+                                      Edit
+                                    </button>
+                                }
                               </div>
                             : <div className='post-message'>
                                 <button>Send message</button>

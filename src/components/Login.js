@@ -12,6 +12,7 @@ const Login = (props) => {
   const addUserkey = (loginObj) => {
     login(loginObj)
     .then(data => {
+      console.log(data)
       if(data.success){
         const token = data.data.token;
         const user = data.data;

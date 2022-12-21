@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom/client';
 import React, { useState, useEffect } from 'react';
-import { HashRouter, Routes, Route, Navigate} from 'react-router-dom';
+import { HashRouter, Routes, Route, Navigate, useLocation} from 'react-router-dom';
 
 import {
   fetchPost, 
@@ -15,31 +15,38 @@ import {
  Nav,
  Dashboard,
  EditPost,
+ SinglePost,
 } from './components/index.js';
 
 const App = ()=> {
   const [posts, setPosts] = useState([]);
+  const [singlePost, setSinglePost] = useState({});
   const [user, setUser] = useState({});
   const [editAPost, setEditAPost] = useState(false);
   const [editPostObj, setEditPostObj] = useState({});
   
   const token = window.localStorage.getItem('token');
+  const location = useLocation();
+  const pathName = location.pathname;
+
 
   const getPosts = async () => {
     const data = await fetchPost();
     const posts = data.data.posts;
     setPosts(posts);
   }
-  
+
   useEffect( ()=> {
     getPosts();
+    setSinglePost({});
   }, [])
- 
+  console.log(singlePost._id)
   return (
     <div>
       <h1 className='title'>Strangers Things</h1>
       <Nav 
         token={ token }
+        pathName={ pathName }
       />
       <Routes>
         <Route exact path='/'
@@ -58,6 +65,9 @@ const App = ()=> {
               editAPost={ editAPost }
               setEditPostObj={ setEditPostObj}
               editPostObj={ editPostObj }
+              pathName={ pathName }
+              setSinglePost={ setSinglePost }
+              singlePost={ singlePost }
             /> 
           }  
         />
@@ -96,6 +106,7 @@ const App = ()=> {
                 editAPost={ editAPost }
                 setEditPostObj={ setEditPostObj}
                 editPostObj={ editPostObj }
+                pathname={ pathName }
               />
             : <Navigate to='/login'/>
           }
@@ -107,7 +118,11 @@ const App = ()=> {
         <Route
           path='/edit-post'
           element={ <EditPost />}
-        /> 
+        />
+            <Route 
+              path={ `/post/${ singlePost._id }` }
+              element={ <SinglePost />}
+            />
       </Routes> 
     </div>
 
