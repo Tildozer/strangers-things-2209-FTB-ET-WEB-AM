@@ -82,12 +82,12 @@ const Post = (props) => {
                         <div className='post-info'>
                           <span>-Post by: { post.author.username }</span>
                           <span>-Location: { post.location }</span>
-                          <span>-Will I deliver?: { post.willDeliver ? 'Yes!': 'No, sorry bud.'}</span>
+                          <span>-Will I deliver?: { post.willDeliver ? 'Yes!': 'No, sorry bud.' }</span>
                         </div>
                         <div className='post-description'>
                           <span>-Description: { post.description }</span>
-                          <span>-Created on: {post.createdAt.slice(0, 10)}</span>
-                          <span>at: {post.createdAt.slice(11, 16)}</span>
+                          <span>-Created on: { post.createdAt.slice(0, 10) }</span>
+                          <span>at: { post.createdAt.slice(11, 16) }</span>
                           &nbsp;
                         </div>
                         {
