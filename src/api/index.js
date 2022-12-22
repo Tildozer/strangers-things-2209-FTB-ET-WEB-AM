@@ -2,7 +2,8 @@ export {
 fetchPost,
 postAPost,
 updatePost,
-deletePost
+deletePost,
+sendPostMessage
 } from './postFetchCalls'
 
 export {

@@ -20,7 +20,7 @@ import {
 
 const App = ()=> {
   const [posts, setPosts] = useState([]);
-  const [singlePost, setSinglePost] = useState({});
+  // const [singlePost, setSinglePost] = useState({});
   const [user, setUser] = useState({});
   const [editAPost, setEditAPost] = useState(false);
   const [editPostObj, setEditPostObj] = useState({});
@@ -65,8 +65,6 @@ const App = ()=> {
               setEditPostObj={ setEditPostObj}
               editPostObj={ editPostObj }
               pathName={ pathName }
-              setSinglePost={ setSinglePost }
-              singlePost={ singlePost }
             /> 
           }  
         />
@@ -118,16 +116,27 @@ const App = ()=> {
           path='/edit-post'
           element={ <EditPost />}
         />
-            <Route 
-              path={ `/send-message/${ singlePost._id }` }
-              element={ <SendMessage
-                  singlePost={ singlePost }
-                  setSinglePost={ setSinglePost }
-                  posts={ posts }
-                  getPosts={ getPosts }
-                />
-              }
-            />
+        {
+          posts.length ?
+            posts.map(singlePost => {
+             return ( 
+               <Route 
+                 key={ singlePost._id }
+                 path={ `/send-message/${ singlePost._id }` }
+                 element={ <SendMessage
+                   singlePost={ singlePost }
+                   // setSinglePost={ setSinglePost }
+                   posts={ posts }
+                   getPosts={ getPosts }
+                   token={ token }
+                 />
+                 }
+              />
+             )
+              })
+            : null
+        }
+
       </Routes> 
     </div>
 

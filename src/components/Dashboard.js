@@ -117,9 +117,10 @@ const Dashboard = (props) => {
               {
                 user.messages.length ?
                   user.messages.map((message, idx) => {
+                    console.log(message)
                     return (
-                      <Fragment>
-                        <h3>{ message.title }</h3>
+                      <Fragment key={message._id}>
+                        <h3>from: { message.fromUser.username }</h3>
                       </Fragment>
                     )
                   })

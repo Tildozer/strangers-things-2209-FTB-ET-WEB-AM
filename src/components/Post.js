@@ -5,7 +5,7 @@ import EditPost from './EditPost.js';
 
 const Post = (props) => {
   const { posts, getPosts, token, setUser, user, setEditAPost,
-    editAPost, setEditPostObj, editPostObj, pathName, setSinglePost, singlePost } = props;
+    editAPost, setEditPostObj, editPostObj, pathName, } = props;
   const [serachPhrase, setSearchPhrase] = useState([]);
   const navigate = useNavigate()
   
@@ -22,7 +22,6 @@ const Post = (props) => {
     setEditPostObj(post)
     }
   const handlePostClick = (post) => {
-    setSinglePost(post)
     navigate(`/send-message/${ post._id }`);
   }
 
