@@ -156,12 +156,16 @@ button:active{
   width: 50vw;
   margin: 1rem;
 }
-
+.message-username{
+  text-decoration: underline;
+}
 .dashboard-post > * {
   margin: 0;
 }
 .dashboard-title{
   color: var(--accentColor2);
+  border-bottom: .3rem solid var(--accentColor);
+  border-radius: .5rem;
   width: 95vw;
 }
 /* End. */

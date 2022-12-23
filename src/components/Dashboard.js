@@ -1,6 +1,6 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import { deletePost } from '../api/postFetchCalls.js';
-import { CreatePost, EditPost } from './index.js';
+import { CreatePost, EditPost, UserMessages, UserPosts } from './index.js';
 
 const Dashboard = (props) => {
   const { user, setUser, loggedIn, token, setEditAPost, editAPost, setEditPostObj, editPostObj } = props;
@@ -12,7 +12,7 @@ const Dashboard = (props) => {
       .then(data => setUser(data));
   }
 
-  const handleEdit = (ev, post) => {
+  const handleEdit = (_, post) => {
     setEditAPost(true);
     setEditPostObj(post);
   }
@@ -22,11 +22,11 @@ const Dashboard = (props) => {
     .then(user => setUser(user));
     setEditAPost(false);
   }, [])
-
+  console.log(user)
   return (
     user._id ?
       <div className='dashboard'>
-        <h1 className='dashboard-title'>Hello { user.username }! welcome back, please enjoy your time here! 
+        <h1>Hello { user.username }! welcome back, please enjoy your time here! 
           </h1>
           {
             makeNewPost ?
@@ -67,67 +67,12 @@ const Dashboard = (props) => {
                 Create new Post
               </button>
           }
-          <div className='dash-post-container'>
-            <h1 className='dashboard-title'>Posts :</h1>
-              {
-                user.posts.length ?
-                  user.posts.filter(post => post.active).length ?
-                    user.posts.filter(post => post.active).map((post, idx) => {
-                      return (
-                        <div  key={ post._id }>
-                        <div className='dashboard-post'>
-                          <h3>{post.title}</h3>
-                          <h4>Price: { post.price }</h4>
-                          <div>
-                            <p>-Description: { post.description }</p>
-                            <span>-created on: {post.createdAt.slice(0, 10)}</span>
-                             &nbsp;
-                            <span>at: {post.createdAt.slice(11, 16)}</span>
-                          </div>
-                          <div>
-                            {
-                            editAPost || makeNewPost ?
-                              null
-                            : <Fragment>
-                              <button
-                                className='edit-button'
-                                onClick={ ev => handleEdit(ev, post) }
-                              >
-                                Edit
-                              </button>
-                              <button
-                                className='delete-button'
-                                onClick={ev => handleDelete(ev)}
-                              >
-                                Delete
-                              </button>
-                            </Fragment>
-                            }
-                          </div>
-                        </div>
-                      </div>
-                      )
-                    })
-                    : <h2>Looks, like you haven't made a post yet, let's change that!</h2>
-                : <h2>Looks, like you haven't made a post yet, let's change that!</h2>
-              }
-          </div>
-          <div className='dash-messages'>
-              <h1 className='dashboard-title'>Messages :</h1>
-              {
-                user.messages.length ?
-                  user.messages.map((message, idx) => {
-                    console.log(message)
-                    return (
-                      <Fragment key={message._id}>
-                        <h3>from: { message.fromUser.username }</h3>
-                      </Fragment>
-                    )
-                  })
-                : <h2>Sorry, you've got no messages at the moment.</h2>
-              }
-          </div>
-       
+          <UserPosts 
+            user={ user } 
+            editAPost={ editAPost }
+            makeNewPost={ makeNewPost }
+          />
+          <UserMessages user={ user }/>
       </div>
     :null
   )
