@@ -1,13 +1,11 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { loggedIn } from '../api/index.js';
-import EditPost from './EditPost.js';
 
 const Posts = (props) => {
-  const { posts, getPosts, token, setUser, user, setEditAPost,
-    editAPost, setEditPostObj, editPostObj, pathName, } = props;
+  const { posts, getPosts, token, user, setUser, setEditAPost, editAPost } = props;
   const [serachPhrase, setSearchPhrase] = useState([]);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   
   const loggedInCheck = async () => {
     if(token){
@@ -16,23 +14,18 @@ const Posts = (props) => {
     };
   }
 
-  const handleEdit = (ev, post) => {
-    const id = ev.target.value;
-    setEditAPost(true);
-    setEditPostObj(post)
-    }
   const handlePostClick = (post) => {
-    navigate(`/send-message/${ post._id }`);
+    navigate(`/single-post/${ post._id }`);
   }
 
   useEffect(() => {
     loggedInCheck();
-    getPosts();
+    getPosts(token);
     setEditAPost(false);
   }, []);
 
-  // console.log(posts)
-  // console.log(user)
+  console.log(posts);
+
   return (
     <Fragment>
       {
@@ -54,26 +47,6 @@ const Posts = (props) => {
               posts.map(post => {
                 return (
                   <Fragment key={ post._id }>
-                    {
-                      editAPost && post._id === editPostObj._id ?
-                        <Fragment>
-                          <button
-                            onClick={_ => setEditAPost(false) }
-                          >
-                            Exit post edit.
-                          </button>
-                          <EditPost 
-                            editPostObj={ editPostObj }
-                            setEditPostObj={ setEditPostObj }
-                            setEditAPost={ setEditAPost }
-                            token={ token }
-                            setUser={ setUser }
-                            pathName={ pathName }
-                            getPosts={ getPosts }
-                          />
-                        </Fragment>
-                      : null
-                    }  
                     <div className='post'>
                       <h1 className='title-price'>{ post.title }</h1>
                       <h2 className='title-price'>Price: { post.price }</h2>
@@ -98,7 +71,7 @@ const Posts = (props) => {
                                     null
                                   : <button 
                                       className='edit-button'
-                                      onClick={ ev => handleEdit(ev, post)}
+                                      onClick={ ev => handlePostClick(post) }
                                       value={ post._id }
                                     >
                                       Edit
@@ -107,7 +80,7 @@ const Posts = (props) => {
                               </div>
                             : <div className='post-message'>
                                 <button 
-                                  onClick={ev => handlePostClick(post)}
+                                  onClick={ ev => handlePostClick(post) }
                                 >
                                   Send message
                                 </button>

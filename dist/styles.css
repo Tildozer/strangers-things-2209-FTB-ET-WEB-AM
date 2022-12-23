@@ -97,7 +97,7 @@ button:active{
 }
 /* End. */
 
-/* Post Page */
+/* Posts Page */
 .post{
   margin: .5rem 2rem 2rem 2rem;
   background-color: var(--secondaryColor);
@@ -170,7 +170,7 @@ button:active{
 }
 /* End. */
 
-/* SendMessage */
+/* SinglePage */
 .single-post{
   width: 90vw;
   background-color: var(--secondaryColor);
@@ -190,6 +190,16 @@ margin: .5rem;
   width: 30vw;
   min-width: 200px;
   margin: 1rem;
+}
+.dash-message{
+  width: 70vw;
+  background-color: var(--secondaryColor);
+  margin: .5rem;
+  padding: .5rem;
+  border-radius: .5rem;
+}
+.message-info > *{
+  margin: .2rem
 }
 /* End. */
 

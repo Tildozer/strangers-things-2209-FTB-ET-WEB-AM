@@ -1,7 +1,13 @@
 const MAIN_URL = `https://strangers-things.herokuapp.com/api/2209-FTB-ET-WEB-AM/`;
 
-export const fetchPost = async () => {
- return await fetch(`${MAIN_URL}posts`)
+export const fetchPost = async (userToken) => {
+  console.log('token', userToken)
+  return await fetch(`${MAIN_URL}posts`, {
+    header: {
+      'Content-type': 'Application/json',
+      'Authorization': `Bearer ${userToken}`,
+    }
+  })
   .then(res =>  res.json())
   .then(data => data)
   .catch(err => console.error(err));

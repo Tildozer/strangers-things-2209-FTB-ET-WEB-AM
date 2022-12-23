@@ -1,9 +1,10 @@
-import React, { useState, } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { sendPostMessage } from '../api';
+import { deletePost, loggedIn, sendPostMessage } from '../api';
+import EditPost from './EditPost';
 
 const SinglePost = (props) => {
-  const { singlePost, getPosts, posts, token } = props;
+  const { singlePost, token, user, setUser, editAPost, setEditAPost, editPostObj, setEditPostObj } = props;
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
 
@@ -19,9 +20,27 @@ const SinglePost = (props) => {
       }
     }
     sendPostMessage(singlePost._id, token, messageObj)
-    .then(_ =>navigate('/dashboard'));
+    .then(_ => navigate('/dashboard'));
   };
 
+  const handleEdit = () => {
+    setEditAPost(true);
+    setEditPostObj(singlePost);
+  }
+
+  const handleDelete = async () => {
+    await deletePost(singlePost._id, token)
+    .then( _ => loggedIn(token))
+    .then(data => setUser(data))
+    navigate('/dashboard')
+  }
+  useEffect(() => {
+    if(token){
+      loggedIn(token)
+      .then(user => setUser(user))
+    }
+  }, [])
+  
   return (
     <div className='whole-post-message'>
       <div className='single-post'>
@@ -39,10 +58,26 @@ const SinglePost = (props) => {
           <p>-Description: { singlePost.description }</p>
       </div>
      {
+
       token ?
-        <form 
+        user._id === singlePost.author._id ?
+        <div>
+          <button 
+            className='edit-button'
+            onClick={ ev => handleEdit() }
+          >
+            Edit post
+          </button>
+          <button
+            className='delete-button'
+            onClick={ ev => handleDelete() }
+          >
+            Delete post
+          </button>
+        </div>
+        : <form 
           className='message-form'
-          onSubmit={ev => handleSubmit(ev)}
+          onSubmit={ ev => handleSubmit(ev)}
         >
           <label>let { singlePost.author.username } know your interested in their '{ singlePost.title }' today!</label>
           <textarea
@@ -54,6 +89,25 @@ const SinglePost = (props) => {
           <button>Send message</button>
         </form>
       : <button className='message-login' onClick={ev => handleClick()}>Login to send a message!</button>
+    }
+    {
+      editAPost ?
+       <Fragment>
+          <button
+            className='exit-make-post'
+            onClick={_ => setEditAPost(false)}
+          >
+            Exit post edit.
+          </button>
+          <EditPost 
+            editPostObj={ editPostObj }
+            setEditPostObj={ setEditPostObj }
+            setEditAPost={ setEditAPost }
+            token={ token }
+            setUser={ setUser }
+        /> 
+       </Fragment>
+     : null
     }
     </div>
   )

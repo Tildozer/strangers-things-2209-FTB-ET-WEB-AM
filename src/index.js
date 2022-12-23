@@ -20,7 +20,6 @@ import {
 
 const App = ()=> {
   const [posts, setPosts] = useState([]);
-  // const [singlePost, setSinglePost] = useState({});
   const [user, setUser] = useState({});
   const [editAPost, setEditAPost] = useState(false);
   const [editPostObj, setEditPostObj] = useState({});
@@ -29,17 +28,16 @@ const App = ()=> {
   const location = useLocation();
   const pathName = location.pathname;
 
-
-  const getPosts = async () => {
-    const data = await fetchPost();
+  const getPosts = async (token) => {
+    const data = await fetchPost(token);
     const posts = data.data.posts;
     setPosts(posts);
   }
 
   useEffect( ()=> {
-    getPosts();
+    getPosts(token);
   }, [])
-
+  
   return (
     <div>
       <h1 className='title'>Strangers Things</h1>
@@ -62,9 +60,6 @@ const App = ()=> {
               setUser={ setUser }
               setEditAPost={ setEditAPost }
               editAPost={ editAPost }
-              setEditPostObj={ setEditPostObj}
-              editPostObj={ editPostObj }
-              pathName={ pathName }
             /> 
           }  
         />
@@ -114,7 +109,7 @@ const App = ()=> {
         />
         <Route
           path='/edit-post'
-          element={ <EditPost />}
+          element={ <EditPost /> }
         />
         {
           posts.length ?
@@ -122,13 +117,16 @@ const App = ()=> {
              return ( 
                <Route 
                  key={ singlePost._id }
-                 path={ `/send-message/${ singlePost._id }` }
+                 path={ `/single-post/${ singlePost._id }` }
                  element={ <SinglePost
                    singlePost={ singlePost }
-                   // setSinglePost={ setSinglePost }
-                   posts={ posts }
-                   getPosts={ getPosts }
                    token={ token }
+                   user={ user }
+                   setUser={ setUser }
+                   editAPost={ editAPost }
+                   setEditAPost={ setEditAPost }
+                   editPostObj={ editPostObj }
+                   setEditPostObj={ setEditPostObj }
                  />
                  }
               />
@@ -136,7 +134,6 @@ const App = ()=> {
               })
           : null
         }
-
       </Routes> 
     </div>
 

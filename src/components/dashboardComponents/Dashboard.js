@@ -1,28 +1,18 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import { deletePost } from '../../api/postFetchCalls.js';
-import { CreatePost, EditPost, UserMessages, UserPosts } from '../index.js';
+import { CreatePost, EditPost, Posts, UserMessages, UserPosts } from '../index.js';
 
 const Dashboard = (props) => {
   const { user, setUser, loggedIn, token, setEditAPost, editAPost, setEditPostObj, editPostObj } = props;
   const [makeNewPost, setMakeNewPost] = useState(false);
-  
-  const handleDelete = async (ev) => {
-    await deletePost(id, token)
-      .then( _ => loggedIn(token))
-      .then(data => setUser(data));
-  }
 
-  const handleEdit = (_, post) => {
-    setEditAPost(true);
-    setEditPostObj(post);
-  }
 
   useEffect(() => {
     loggedIn(token)
     .then(user => setUser(user));
     setEditAPost(false);
   }, [])
-  // console.log(user)
+
   return (
     user._id ?
       <div className='dashboard'>
@@ -33,7 +23,7 @@ const Dashboard = (props) => {
               <Fragment>
                 <button
                   className='exit-make-post'
-                  onClick={_ => setMakeNewPost(false)}
+                  onClick={ _ => setMakeNewPost(false) }
                 >
                   Exit post creation.
                 </button>
@@ -69,8 +59,12 @@ const Dashboard = (props) => {
           }
           <UserPosts 
             user={ user } 
+            setUser={ setUser}
             editAPost={ editAPost }
             makeNewPost={ makeNewPost }
+            setEditAPost={ setEditAPost }
+            setEditPostObj={ setEditPostObj }
+            token={ token }
           />
           <UserMessages user={ user }/>
       </div>

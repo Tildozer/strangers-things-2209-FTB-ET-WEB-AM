@@ -1,4 +1,5 @@
 import React, {useEffect, useState, } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { loggedIn, updatePost } from '../api';
 
 const EditPost = (props) => {
@@ -7,6 +8,8 @@ const EditPost = (props) => {
     const [editDescription, setEditDescription] = useState('');
     const [editPrice, setEditPrice] = useState('');
     const [editLocation, setEditLocation] = useState('');
+
+    const navigate = useNavigate();
 
     const handleSubmit = async ev => {
       ev.preventDefault();
@@ -23,11 +26,9 @@ const EditPost = (props) => {
       await updatePost(newPost, token, editPostObj._id)
       .then(_ => loggedIn(token))
       .then(data => setUser(data));
-      if(pathName === '/posts'){
-        getPosts();
-      }
       setEditAPost(false);
       setEditPostObj({});
+      navigate('/dashboard');
     }
 
     useEffect(() => {

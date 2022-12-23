@@ -1,7 +1,24 @@
 import React, { Fragment } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { deletePost, loggedIn } from '../../api';
 
 const UserPosts = (props) => {
-  const { user, editAPost, makeNewPost, } = props;
+  const { user, setUser, editAPost, makeNewPost, setEditAPost, setEditPostObj, token } = props;
+  const navigate = useNavigate();
+
+  const handleDelete = async (post) => {
+    return await deletePost(post._id, token)
+      .then( _ => loggedIn(token))
+      .then(data => setUser(data))
+    //  .then(_ => navigate('/dashboard'));
+  };
+
+  const handleEdit = (post) => {
+    setEditAPost(true);
+    setEditPostObj(post);
+  };
+  
+
   return (
     <div className='dash-post-container'>
       <h1 className='dashboard-title'>Posts :</h1>
@@ -22,21 +39,21 @@ const UserPosts = (props) => {
                       </div>
                       <div>
                         {
-                            editAPost || makeNewPost ?
-                                null
-                            : <Fragment>
-                                <button
+                          editAPost || makeNewPost ?
+                            null
+                          : <Fragment>
+                              <button
                                 className='edit-button'
-                                onClick={ ev => handleEdit(_, post) }
-                                >
+                                onClick={ ev => handleEdit(post) }
+                              >
                                 Edit
-                                </button>
-                                <button
+                              </button>
+                              <button
                                 className='delete-button'
-                                onClick={ev => handleDelete(ev)}
-                                >
+                                onClick={ ev => handleDelete(post) }
+                              >
                                 Delete
-                                </button>
+                              </button>
                             </Fragment>
                         }
                     </div>
