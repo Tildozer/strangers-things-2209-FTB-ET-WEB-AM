@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import {
   registerUser,
   loggedIn,
-} from '../api/index.js'
+} from '../api/index.js';
 
 const Register = (props) => {
-  const { setUser, user } = props
+  const { setUser, user } = props;
   const [registerUsername, setRegisterUsername] = useState('');
   const [registerPassword, setRegisterPassword] = useState('');
   const [registerNotValid, setRegisterNotValid] = useState(false);
@@ -22,14 +22,14 @@ const Register = (props) => {
     registerUser(registerObj)
     .then(data => {
       if(data.success){
-        const token = data.data.token
+        const token = data.data.token;
         loggedIn(token);
         setUser(data.data);
-        window.localStorage.setItem('token', token)
+        window.localStorage.setItem('token', token);
         setRegisterNotValid(false);
       } else {
-        setRegisterError(data.error.message)
-        setRegisterNotValid(true)
+        setRegisterError(data.error.message);
+        setRegisterNotValid(true);
       }
     })
   }

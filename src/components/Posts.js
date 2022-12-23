@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { loggedIn } from '../api/index.js';
 import EditPost from './EditPost.js';
 
-const Post = (props) => {
+const Posts = (props) => {
   const { posts, getPosts, token, setUser, user, setEditAPost,
     editAPost, setEditPostObj, editPostObj, pathName, } = props;
   const [serachPhrase, setSearchPhrase] = useState([]);
@@ -129,4 +129,4 @@ const Post = (props) => {
   );
 }
 
-export default Post;
+export default Posts;

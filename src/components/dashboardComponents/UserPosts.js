@@ -1,7 +1,7 @@
-import React, { Fragment } from 'react'
+import React, { Fragment } from 'react';
 
 const UserPosts = (props) => {
-  const { user, editAPost, makeNewPost, } = props
+  const { user, editAPost, makeNewPost, } = props;
   return (
     <div className='dash-post-container'>
       <h1 className='dashboard-title'>Posts :</h1>

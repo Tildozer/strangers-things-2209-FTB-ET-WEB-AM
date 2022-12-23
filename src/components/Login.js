@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Link, redirect } from 'react-router-dom';
-import{ login } from '../api/index.js'
+import { Link } from 'react-router-dom';
+import{ login } from '../api/index.js';
 
 const Login = (props) => {
-  const { setUser, user } = props
+  const { setUser, user } = props;
   const [loginUsername, setLoginUsername] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
   const [wrongLogin, setWrongLogin] = useState(false);
@@ -12,7 +12,6 @@ const Login = (props) => {
   const addUserkey = (loginObj) => {
     login(loginObj)
     .then(data => {
-      console.log(data)
       if(data.success){
         const token = data.data.token;
         const user = data.data;
@@ -33,9 +32,9 @@ const Login = (props) => {
         'username': loginUsername,
         'password': loginPassword,
       }
-    }
+    };
     addUserkey(loginObj);
-  }
+  };
 
   useEffect(() => {
     const token = window.localStorage.getItem('token');

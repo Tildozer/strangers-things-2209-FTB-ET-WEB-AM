@@ -8,7 +8,7 @@ import {
 } from './api/index.js';
 
 import {
- Post,
+ Posts,
  Login,
  Logout,
  Register,
@@ -54,7 +54,7 @@ const App = ()=> {
         <Route 
           path='/posts' 
           element= { 
-            <Post 
+            <Posts 
               posts={ posts }
               getPosts={ getPosts }
               token={ token }
@@ -134,7 +134,7 @@ const App = ()=> {
               />
              )
               })
-            : null
+          : null
         }
 
       </Routes> 

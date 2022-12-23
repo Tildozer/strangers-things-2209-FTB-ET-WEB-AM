@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Nav = (props) => {
-  const { token, pathName } = props
+  const { token, pathName } = props;
 
   return (
     <nav className='main-nav'>

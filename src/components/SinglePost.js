@@ -1,15 +1,16 @@
-import React, { useEffect, useState, } from 'react'
+import React, { useState, } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { sendPostMessage } from '../api';
 
 const SinglePost = (props) => {
   const { singlePost, getPosts, posts, token } = props;
-  const [message, setMessage] = useState('')
+  const [message, setMessage] = useState('');
   const navigate = useNavigate();
 
   const handleClick = () => {
     return navigate('/login');
-  }
+  };
+
   const handleSubmit = (ev) => {
     ev.preventDefault();
     const messageObj = {
@@ -17,14 +18,10 @@ const SinglePost = (props) => {
         'content': message
       }
     }
-    console.log(singlePost._id)
-    console.log(token)
     sendPostMessage(singlePost._id, token, messageObj)
-    .then(_ =>navigate('/dashboard'))
-  }
+    .then(_ =>navigate('/dashboard'));
+  };
 
-  useEffect(() => {
-  }, [])
   return (
     <div className='whole-post-message'>
       <div className='single-post'>

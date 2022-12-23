@@ -1,9 +1,8 @@
-import React, { useState } from 'react'
-import { Navigate } from 'react-router-dom';
+import React, { useState } from 'react';
 import { loggedIn, postAPost } from '../api';
 
 const CreatePost = (props) => {
-  const { setMakeNewPost, token, setUser } = props
+  const { setMakeNewPost, token, setUser } = props;
   const [location, setLocation] = useState('');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -21,10 +20,10 @@ const CreatePost = (props) => {
         'location' : location ? location : '[On Request]',
         'willDeliver' : deliver,
       }
-    }
+    };
     postAPost(postObj, token)
     .then(_ => loggedIn(token))
-    .then(data => setUser(data))
+    .then(data => setUser(data));
     setMakeNewPost(false);
   }
 

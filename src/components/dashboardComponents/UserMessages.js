@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 
 const UserMessages = (props) => {
-  const { user } = props
+  const { user } = props;
   return (
     <div className='dash-messages'>
     <h1>Messages :</h1>
@@ -10,8 +10,7 @@ const UserMessages = (props) => {
         <Fragment>
           <h1 className='dashboard-title'>Messages for you:</h1>
           {
-            user.messages.filter(message => message.fromUser.username !== user.username ).map((message, idx) => {
-              console.log(message)
+            user.messages.filter(message => message.fromUser.username !== user.username ).map(message => {
               return (
                 <div key={message._id}>
                   <div>
@@ -20,12 +19,12 @@ const UserMessages = (props) => {
                   </div>
                   <p>-{ message.content }</p>
                 </div>
-              )
+              );
             })
           }
             <h1 className='dashboard-title'>Messages from you:</h1>
           {
-            user.messages.filter(message => message.fromUser.username === user.username ).map((message, idx) => {
+            user.messages.filter(message => message.fromUser.username === user.username ).map(message => {
               console.log(message)
               return (
                 <div key={message._id}>
@@ -34,7 +33,7 @@ const UserMessages = (props) => {
                     <p>-{ message.content }</p>
                   </div>
                 </div>
-              )
+              );
             })
           }
           </Fragment>

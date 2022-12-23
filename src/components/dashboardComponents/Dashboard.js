@@ -1,6 +1,6 @@
 import React, { useEffect, useState, Fragment } from 'react';
-import { deletePost } from '../api/postFetchCalls.js';
-import { CreatePost, EditPost, UserMessages, UserPosts } from './index.js';
+import { deletePost } from '../../api/postFetchCalls.js';
+import { CreatePost, EditPost, UserMessages, UserPosts } from '../index.js';
 
 const Dashboard = (props) => {
   const { user, setUser, loggedIn, token, setEditAPost, editAPost, setEditPostObj, editPostObj } = props;
@@ -22,7 +22,7 @@ const Dashboard = (props) => {
     .then(user => setUser(user));
     setEditAPost(false);
   }, [])
-  console.log(user)
+  // console.log(user)
   return (
     user._id ?
       <div className='dashboard'>
@@ -75,7 +75,7 @@ const Dashboard = (props) => {
           <UserMessages user={ user }/>
       </div>
     :null
-  )
+  );
 }
 
 export default Dashboard;
