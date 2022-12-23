@@ -15,7 +15,7 @@ import {
  Nav,
  Dashboard,
  EditPost,
- SendMessage,
+ SinglePost,
 } from './components/index.js';
 
 const App = ()=> {
@@ -123,7 +123,7 @@ const App = ()=> {
                <Route 
                  key={ singlePost._id }
                  path={ `/send-message/${ singlePost._id }` }
-                 element={ <SendMessage
+                 element={ <SinglePost
                    singlePost={ singlePost }
                    // setSinglePost={ setSinglePost }
                    posts={ posts }

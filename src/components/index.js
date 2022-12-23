@@ -8,6 +8,6 @@ export { default as Nav } from './Nav.js';
 export { default as Dashboard } from './Dashboard.js';
 export { default as CreatePost } from './CreatePost.js';
 export { default as EditPost } from './EditPost.js';
-export { default as SendMessage } from './SendMessage.js';
+export { default as SinglePost } from './SinglePost.js';
 export { default as UserMessages } from './UserMessages.js';
 export { default as UserPosts } from './UserPosts.js';

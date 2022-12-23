@@ -2,7 +2,7 @@ import React, { useEffect, useState, } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { sendPostMessage } from '../api';
 
-const SendMessage = (props) => {
+const SinglePost = (props) => {
   const { singlePost, getPosts, posts, token } = props;
   const [message, setMessage] = useState('')
   const navigate = useNavigate();
@@ -62,4 +62,4 @@ const SendMessage = (props) => {
   )
 }
 
-export default SendMessage;
+export default SinglePost;
