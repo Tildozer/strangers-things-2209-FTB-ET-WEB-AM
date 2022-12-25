@@ -1,7 +1,11 @@
 import React, { Fragment } from 'react';
 
 const UserMessages = (props) => {
-  const { user } = props;
+  const { posts, user } = props;
+  // filter out messages that are on post that are not avaible anymore. 
+  const postsIds = posts.map(post => post._id);
+  const activePostCheck = user.messages.filter(message => postsIds.indexOf(message.post._id) !== -1)
+  console.log('active',activePostCheck);
   return (
     <div className='dash-messages'>
     <h1>Messages :</h1>
@@ -10,7 +14,7 @@ const UserMessages = (props) => {
         <Fragment>
           <h1 className='dashboard-title'>Messages for you:</h1>
           {
-            user.messages.filter(message => message.fromUser.username !== user.username ).map(message => {
+            activePostCheck.filter(message => message.fromUser.username !== user.username ).map(message => {
               return (
                 <div key={message._id} className='dash-message'>
                   <div className='message-info'>
@@ -24,15 +28,17 @@ const UserMessages = (props) => {
           }
             <h1 className='dashboard-title'>Messages from you:</h1>
           {
-            user.messages.filter(message => message.fromUser.username === user.username ).map(message => {
-             // console.log(message)
+           activePostCheck.filter(message => message.fromUser.username === user.username ).map(message => {
+             console.log(message)
               return (
-                <div key={message._id} className='dash-message'>
-                  <div>
-                    <h3>post: '{ message.post.title }'</h3>
-                    <p>-{ message.content }</p>
+                <a key={message._id} href={`#/single-post/${message.post._id}`}>
+                  <div className='dash-message'>
+                    <div>
+                      <h3>post: '{ message.post.title }'</h3>
+                      <p>-{ message.content }</p>
+                    </div>
                   </div>
-                </div>
+                </a>
               );
             })
           }

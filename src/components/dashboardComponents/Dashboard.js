@@ -3,7 +3,7 @@ import { deletePost } from '../../api/postFetchCalls.js';
 import { CreatePost, EditPost, Posts, UserMessages, UserPosts } from '../index.js';
 
 const Dashboard = (props) => {
-  const { user, setUser, loggedIn, token, setEditAPost, editAPost, setEditPostObj, editPostObj } = props;
+  const { user, setUser, loggedIn, token, setEditAPost, editAPost, setEditPostObj, editPostObj, posts } = props;
   const [makeNewPost, setMakeNewPost] = useState(false);
 
 
@@ -66,7 +66,7 @@ const Dashboard = (props) => {
             setEditPostObj={ setEditPostObj }
             token={ token }
           />
-          <UserMessages user={ user }/>
+          <UserMessages posts={ posts } user={ user }/>
       </div>
     :null
   );

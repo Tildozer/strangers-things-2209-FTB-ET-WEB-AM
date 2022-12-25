@@ -37,7 +37,7 @@ const App = ()=> {
   useEffect( ()=> {
     getPosts(token);
   }, [])
-  
+
   return (
     <div>
       <h1 className='title'>Strangers Things</h1>
@@ -99,6 +99,7 @@ const App = ()=> {
                 setEditPostObj={ setEditPostObj}
                 editPostObj={ editPostObj }
                 pathname={ pathName }
+                posts={ posts }
               />
             : <Navigate to='/login'/>
           }
