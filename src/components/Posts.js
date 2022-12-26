@@ -4,7 +4,7 @@ import { loggedIn } from '../api/index.js';
 
 const Posts = (props) => {
   const { posts, getPosts, token, user, setUser, setEditAPost, editAPost } = props;
-  const [serachPhrase, setSearchPhrase] = useState([]);
+  const [searchPhrase, setSearchPhrase] = useState('');
   const navigate = useNavigate();
   
   const loggedInCheck = async () => {
@@ -17,6 +17,11 @@ const Posts = (props) => {
   const handlePostClick = (post) => {
     navigate(`/single-post/${ post._id }`);
   }
+
+  let postSearchFilter = posts.filter(post => post.description.toLowerCase().includes(searchPhrase.toLowerCase()) 
+    || post.title.toLowerCase().includes(searchPhrase.toLowerCase()) 
+    || post.location.toLowerCase().includes(searchPhrase.toLowerCase()) 
+    || post.author.username.toLowerCase().includes(searchPhrase.toLowerCase()));
 
   useEffect(() => {
     loggedInCheck();
@@ -34,15 +39,13 @@ const Posts = (props) => {
             <div>
               <input
                 placeholder='search posts...'
-                onChange={ev => {
-                  setSearchPhrase(ev.target.value);
-                }}
-                value={ serachPhrase }
+                onChange={ ev => setSearchPhrase(ev.target.value) }
+                value={ searchPhrase }
               />
             </div>
             </form>
             {
-              posts.map(post => {
+              postSearchFilter.map(post => {
                 return (
                   <Fragment key={ post._id }>
                     <div className='post'>
