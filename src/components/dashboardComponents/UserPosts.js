@@ -9,8 +9,7 @@ const UserPosts = (props) => {
   const handleDelete = async (post) => {
     return await deletePost(post._id, token)
       .then( _ => loggedIn(token))
-      .then(data => setUser(data))
-    //  .then(_ => navigate('/dashboard'));
+      .then(data => setUser(data));
   };
 
   const handleEdit = (post) => {

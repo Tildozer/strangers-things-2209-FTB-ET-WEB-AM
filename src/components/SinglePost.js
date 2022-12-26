@@ -26,14 +26,15 @@ const SinglePost = (props) => {
   const handleEdit = () => {
     setEditAPost(true);
     setEditPostObj(singlePost);
-  }
+  };
 
   const handleDelete = async () => {
     await deletePost(singlePost._id, token)
     .then( _ => loggedIn(token))
-    .then(data => setUser(data))
-    navigate('/dashboard')
-  }
+    .then(data => setUser(data));
+    navigate('/dashboard');
+  };
+
   useEffect(() => {
     if(token){
       loggedIn(token)
@@ -61,20 +62,22 @@ const SinglePost = (props) => {
 
       token ?
         user._id === singlePost.author._id ?
-        <div>
-          <button 
-            className='edit-button'
-            onClick={ ev => handleEdit() }
-          >
-            Edit post
-          </button>
-          <button
-            className='delete-button'
-            onClick={ ev => handleDelete() }
-          >
-            Delete post
-          </button>
-        </div>
+          editAPost ?
+            null  
+          : <div>
+            <button 
+              className='edit-button'
+              onClick={ ev => handleEdit() }
+            >
+              Edit post
+            </button>
+            <button
+              className='delete-button'
+              onClick={ ev => handleDelete() }
+            >
+              Delete post
+            </button>
+          </div>
         : <form 
           className='message-form'
           onSubmit={ ev => handleSubmit(ev)}

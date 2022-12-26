@@ -1,7 +1,6 @@
 const MAIN_URL = `https://strangers-things.herokuapp.com/api/2209-FTB-ET-WEB-AM/`;
 
 export const fetchPost = async (userToken) => {
-  console.log('token', userToken)
   return await fetch(`${MAIN_URL}posts`, {
     header: {
       'Content-type': 'Application/json',
@@ -24,7 +23,7 @@ export const postAPost = async (submitObj, userToken) => {
       body: JSON.stringify(submitObj),
     })
     .then(res => res.json())
-    .then(data => console.log(data))
+    .then(data => data)
     .catch(err => console.error(err))
   );
 }
@@ -40,17 +39,9 @@ export const updatePost = async (postEditObj, userToken, postId ) => {
       body: JSON.stringify(postEditObj),
     })
     .then(res => res.json())
-    .then(data => console.log(data))
+    .then(data => data)
     .catch(err => console.error(err))
   );
-  /* postEditObj
-    post: {
-      title: "My favorite stuffed animal",
-      description: "This is a pooh doll from 1973. It has been carefully taken care of since I first got it.",
-      price: "$480.00",
-      location: "New York, NY",
-      willDeliver: true
-    } */
 }
 
 export const deletePost = async (postId, userToken) => {
@@ -63,7 +54,7 @@ export const deletePost = async (postId, userToken) => {
       }, 
     })
     .then(res => res.json())
-    .then(data => console.log(data))
+    .then(data => data)
     .catch(err => console.error(err))
   );
 }
@@ -79,6 +70,7 @@ export const sendPostMessage = async (postId, token, messageObj) => {
       body: JSON.stringify(messageObj)
     })
     .then( response => response.json())
-    .then(data => console.log(data))
+    .then(data => data)
+    .catch(err => console.error(err))
   )
 } 

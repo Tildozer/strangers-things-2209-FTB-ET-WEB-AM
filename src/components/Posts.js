@@ -24,8 +24,6 @@ const Posts = (props) => {
     setEditAPost(false);
   }, []);
 
-  console.log(posts);
-
   return (
     <Fragment>
       {

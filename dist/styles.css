@@ -168,6 +168,12 @@ button:active{
   border-radius: .5rem;
   width: 95vw;
 }
+.link-post{
+  color: var(--accentColor);
+}
+.link-post:hover{
+  color: var(--accentColor2);
+}
 /* End. */
 
 /* SinglePage */
