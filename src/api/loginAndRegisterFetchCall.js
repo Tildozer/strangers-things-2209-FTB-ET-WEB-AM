@@ -30,7 +30,13 @@ export const loggedIn = async (userToken) => {
       },
     })
     .then(res => res.json())
-    .then(data => data.data)
+    .then(data => {
+      if(!data.success){
+        window.localStorage.removeItem('token');
+      } else{
+        return data.data;
+      }
+    })
     .catch(err => console.error(err))
   );
 }

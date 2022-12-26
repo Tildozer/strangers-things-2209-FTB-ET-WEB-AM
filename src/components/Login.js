@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import{ login } from '../api/index.js';
 
 const Login = (props) => {
-  const { setUser, user } = props;
+  const { setUser, user, setIsUserLoggingIn, setAlert, setAlertMessage } = props;
   const [loginUsername, setLoginUsername] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
   const [wrongLogin, setWrongLogin] = useState(false);
@@ -15,7 +15,10 @@ const Login = (props) => {
       if(data.success){
         const token = data.data.token;
         const user = data.data;
+        setIsUserLoggingIn(true)
         setUser(user);
+        setAlertMessage(`Successful login, have a good day ${loginUsername}.`)
+        setAlert(true)
         window.localStorage.setItem('token', token);
         setWrongLogin(false);
       } else {

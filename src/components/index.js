@@ -11,3 +11,4 @@ export { default as EditPost } from './EditPost.js';
 export { default as SinglePost } from './SinglePost.js';
 export { default as UserMessages } from './dashboardComponents/UserMessages.js';
 export { default as UserPosts } from './dashboardComponents/UserPosts.js';
+export { default as Alert } from './Alert.js';

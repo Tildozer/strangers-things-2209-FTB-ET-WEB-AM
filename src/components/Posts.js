@@ -45,10 +45,11 @@ const Posts = (props) => {
             </div>
             </form>
             {
-              postSearchFilter.map(post => {
+              postSearchFilter.length ?
+                postSearchFilter.map(post => {
                 return (
                   <Fragment key={ post._id }>
-                    <div className='post'>
+                    <div className='post flex-columns'>
                       <h1 className='title-price'>{ post.title }</h1>
                       <h2 className='title-price'>Price: { post.price }</h2>
                       <div className='about-info'>
@@ -95,10 +96,11 @@ const Posts = (props) => {
                 </Fragment>
                 )
               })
+            : <h2 className='no-results'>Sorry no post matched, try something else.</h2>
             }
           </div>
         : null
-      };    
+      }  
     </Fragment>
   );
 }

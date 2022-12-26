@@ -16,6 +16,7 @@ import {
  Dashboard,
  EditPost,
  SinglePost,
+ Alert,
 } from './components/index.js';
 
 const App = ()=> {
@@ -23,6 +24,9 @@ const App = ()=> {
   const [user, setUser] = useState({});
   const [editAPost, setEditAPost] = useState(false);
   const [editPostObj, setEditPostObj] = useState({});
+  const [alert, setAlert] = useState(false);
+  const [isUserLoggingIn, setIsUserLoggingIn] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('')
   
   const token = window.localStorage.getItem('token');
   const location = useLocation();
@@ -71,6 +75,9 @@ const App = ()=> {
             : <Login
                 setUser={ setUser }
                 user={ user }
+                setIsUserLoggingIn={ setIsUserLoggingIn }
+                setAlert={ setAlert }
+                setAlertMessage={ setAlertMessage }
               /> 
           } 
         />
@@ -136,6 +143,17 @@ const App = ()=> {
           : null
         }
       </Routes> 
+     {
+      alert ? 
+        <Alert 
+          setAlert={ setAlert }
+          alertMessage={ alertMessage }
+          setAlertMessage={ setAlertMessage }
+          isUserLoggingIn={ isUserLoggingIn }
+          setIsUserLoggingIn={ setIsUserLoggingIn }
+        />
+      : null
+     }
     </div>
 
   );
