@@ -3,13 +3,18 @@ import { useNavigate } from 'react-router-dom';
 import { deletePost, loggedIn } from '../../api';
 
 const UserPosts = (props) => {
-  const { user, setUser, editAPost, makeNewPost, setEditAPost, setEditPostObj, token } = props;
+  const { user, setUser, editAPost, makeNewPost, setEditAPost, setEditPostObj, token, setAlert, setAlertMessage } = props;
   const navigate = useNavigate();
 
   const handleDelete = async (post) => {
     return await deletePost(post._id, token)
       .then( _ => loggedIn(token))
-      .then(data => setUser(data));
+      .then(data => {
+        setUser(data);
+        setAlert(true);
+        setAlertMessage(`${post.title} has been deleted.`);
+      })
+      .catch(err => console.error(err))
   };
 
   const handleEdit = (post) => {
@@ -19,7 +24,7 @@ const UserPosts = (props) => {
   
 
   return (
-    <div className='dash-post-container'>
+    <div className='dash-post-container flex-columns'>
       <h1 className='dashboard-title'>Posts :</h1>
         {
           user.posts.length ?

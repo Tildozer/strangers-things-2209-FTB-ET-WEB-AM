@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { loggedIn, updatePost } from '../api';
 
 const EditPost = (props) => {
-    const { editPostObj, setEditPostObj, setEditAPost, token, setUser, getPosts, pathName } = props;
+    const { editPostObj, setEditPostObj, setEditAPost, token, setUser, setAlert, setAlertMessage } = props;
     const [editTitle, setEditTitle] = useState('');
     const [editDescription, setEditDescription] = useState('');
     const [editPrice, setEditPrice] = useState('');
@@ -25,7 +25,12 @@ const EditPost = (props) => {
       }
       await updatePost(newPost, token, editPostObj._id)
       .then(_ => loggedIn(token))
-      .then(data => setUser(data));
+      .then(data => {
+        setUser(data);
+        setAlert(true);
+        setAlertMessage(`${editPostObj.title} was successfuly edited!`)
+      })
+      .catch(err => console.error(err));
       setEditAPost(false);
       setEditPostObj({});
       navigate('/dashboard');

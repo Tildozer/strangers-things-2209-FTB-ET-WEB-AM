@@ -4,7 +4,7 @@ import { deletePost, loggedIn, sendPostMessage } from '../api';
 import EditPost from './EditPost';
 
 const SinglePost = (props) => {
-  const { singlePost, token, user, setUser, editAPost, setEditAPost, editPostObj, setEditPostObj } = props;
+  const { singlePost, token, user, setUser, editAPost, setEditAPost, editPostObj, setEditPostObj, setAlert, setAlertMessage } = props;
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
 
@@ -20,6 +20,10 @@ const SinglePost = (props) => {
       }
     }
     sendPostMessage(singlePost._id, token, messageObj)
+    .then(_ => {
+      setAlert(true);
+      setAlertMessage(`Message sent on post: ${singlePost.title}`)
+    })
     .then(_ => navigate('/dashboard'));
   };
 
@@ -31,7 +35,12 @@ const SinglePost = (props) => {
   const handleDelete = async () => {
     await deletePost(singlePost._id, token)
     .then( _ => loggedIn(token))
-    .then(data => setUser(data));
+    .then(data => {
+      setAlert(true);
+      setAlertMessage(`${ singlePost.title } has been deleted.`);
+      setUser(data);
+    })
+    .catch(err => console.error(err));
     navigate('/dashboard');
   };
 
@@ -43,8 +52,8 @@ const SinglePost = (props) => {
   }, [])
   
   return (
-    <div className='whole-post-message'>
-      <div className='single-post'>
+    <div className='whole-post-message flex-columns'>
+      <div className='single-post flex-columns'>
         <div>
           <h1>{ singlePost.title }</h1>
           <h2>Price: { singlePost.price }</h2>
@@ -79,7 +88,7 @@ const SinglePost = (props) => {
             </button>
           </div>
         : <form 
-          className='message-form'
+          className='message-form flex-columns'
           onSubmit={ ev => handleSubmit(ev)}
         >
           <label>let { singlePost.author.username } know your interested in their '{ singlePost.title }' today!</label>
@@ -108,6 +117,8 @@ const SinglePost = (props) => {
             setEditAPost={ setEditAPost }
             token={ token }
             setUser={ setUser }
+            setAlert={ setAlert }
+            setAlertMessage={ setAlertMessage }
         /> 
        </Fragment>
      : null

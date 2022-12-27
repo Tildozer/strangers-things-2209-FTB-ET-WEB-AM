@@ -5,7 +5,7 @@ import {
 } from '../api/index.js';
 
 const Register = (props) => {
-  const { setUser, user } = props;
+  const { setUser, setAlert, setAlertMessage } = props;
   const [registerUsername, setRegisterUsername] = useState('');
   const [registerPassword, setRegisterPassword] = useState('');
   const [registerNotValid, setRegisterNotValid] = useState(false);
@@ -23,6 +23,8 @@ const Register = (props) => {
     .then(data => {
       if(data.success){
         const token = data.data.token;
+        setAlert(true);
+        setAlertMessage(` Thanks for joining Strangers Things, ${registerUsername}!`)
         loggedIn(token);
         setUser(data.data);
         window.localStorage.setItem('token', token);
@@ -38,7 +40,7 @@ const Register = (props) => {
     <div>
       
       <form
-        className='register-form'
+        className='register-form flex-columns'
         onSubmit={ev => handleSubmit(ev) }
       >
         <h1>Let's become a little less of a stranger!</h1>

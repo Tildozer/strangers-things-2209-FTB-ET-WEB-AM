@@ -8,7 +8,7 @@ const UserMessages = (props) => {
   const activePostCheck = user.messages.filter(message => postsIds.indexOf(message.post._id) !== -1)
 
   return (
-    <div className='dash-messages'>
+    <div className='dash-messages flex-columns'>
     <h1>Messages :</h1>
     {
       user.messages.length ?

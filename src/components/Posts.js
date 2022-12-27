@@ -34,7 +34,7 @@ const Posts = (props) => {
       {
         posts.length ?
           <div>
-            <form className='post-search'>
+            <form className='post-search flex-columns'>
             <h1>Posts</h1>
             <div>
               <input
@@ -53,12 +53,12 @@ const Posts = (props) => {
                       <h1 className='title-price'>{ post.title }</h1>
                       <h2 className='title-price'>Price: { post.price }</h2>
                       <div className='about-info'>
-                        <div className='post-info'>
+                        <div className='post-info flex-columns'>
                           <span>-Post by: { post.author.username }</span>
                           <span>-Location: { post.location }</span>
                           <span>-Will I deliver?: { post.willDeliver ? 'Yes!': 'No, sorry bud.' }</span>
                         </div>
-                        <div className='post-description'>
+                        <div className='post-description flex-columns'>
                           <span>-Description: { post.description }</span>
                           <span>-Created on: { post.createdAt.slice(0, 10) }</span>
                           <span>at: { post.createdAt.slice(11, 16) }</span>

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { loggedIn, postAPost } from '../api';
 
 const CreatePost = (props) => {
-  const { setMakeNewPost, token, setUser } = props;
+  const { setMakeNewPost, token, setUser, setAlert, setAlertMessage } = props;
   const [location, setLocation] = useState('');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -23,13 +23,17 @@ const CreatePost = (props) => {
     };
     postAPost(postObj, token)
     .then(_ => loggedIn(token))
-    .then(data => setUser(data));
+    .then(data => {
+      setAlertMessage(`${title} has been created!`);
+      setAlert(true);
+      setUser(data);
+    });
     setMakeNewPost(false);
   }
 
   return (
     <form 
-      className='create-post'
+      className='create-post flex-columns'
       onSubmit={ev => handlePostSubmit(ev)}
     >
         <div className='create-post-title'>Title :</div>

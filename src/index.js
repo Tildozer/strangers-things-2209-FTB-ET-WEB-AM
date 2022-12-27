@@ -14,7 +14,6 @@ import {
  Register,
  Nav,
  Dashboard,
- EditPost,
  SinglePost,
  Alert,
 } from './components/index.js';
@@ -87,8 +86,9 @@ const App = ()=> {
             token ?
               <Navigate to='/dashboard'/>
             : <Register 
+                setAlertMessage={ setAlertMessage }
+                setAlert={ setAlert }
                 setUser={ setUser }
-                user={ user }
               /> 
           } 
         />
@@ -98,15 +98,16 @@ const App = ()=> {
             token ?
               <Dashboard
                 user={ user }
+                token={ token }
                 setUser={ setUser }
                 loggedIn={ loggedIn }
-                token={ token }
                 setEditAPost={ setEditAPost }
                 editAPost={ editAPost }
                 setEditPostObj={ setEditPostObj}
                 editPostObj={ editPostObj }
-                pathname={ pathName }
                 posts={ posts }
+                setAlert={ setAlert }
+                setAlertMessage={ setAlertMessage }
               />
             : <Navigate to='/login'/>
           }
@@ -114,10 +115,6 @@ const App = ()=> {
         <Route 
           path='/logout'
           element={ <Logout /> }
-        />
-        <Route
-          path='/edit-post'
-          element={ <EditPost /> }
         />
         {
           posts.length ?
@@ -135,6 +132,8 @@ const App = ()=> {
                    setEditAPost={ setEditAPost }
                    editPostObj={ editPostObj }
                    setEditPostObj={ setEditPostObj }
+                   setAlert={ setAlert }
+                   setAlertMessage={ setAlertMessage }
                  />
                  }
               />

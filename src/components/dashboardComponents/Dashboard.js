@@ -2,7 +2,7 @@ import React, { useEffect, useState, Fragment } from 'react';
 import { CreatePost, EditPost, UserMessages, UserPosts } from '../index.js';
 
 const Dashboard = (props) => {
-  const { user, setUser, loggedIn, token, setEditAPost, editAPost, setEditPostObj, editPostObj, posts } = props;
+  const { user, setUser, loggedIn, token, setEditAPost, editAPost, setEditPostObj, editPostObj, posts, setAlert, setAlertMessage } = props;
   const [makeNewPost, setMakeNewPost] = useState(false);
 
 
@@ -14,7 +14,7 @@ const Dashboard = (props) => {
 
   return (
     user._id ?
-      <div className='dashboard'>
+      <div className='dashboard flex-columns'>
         <h1>Hello { user.username }! welcome back, please enjoy your time here! 
           </h1>
           {
@@ -30,6 +30,8 @@ const Dashboard = (props) => {
                   setMakeNewPost={ setMakeNewPost }
                   token={ token }
                   setUser={ setUser }
+                  setAlert={ setAlert }
+                  setAlertMessage={ setAlertMessage }
                 />
               </Fragment>
               // start of second if statment.
@@ -47,6 +49,8 @@ const Dashboard = (props) => {
                   setEditAPost={ setEditAPost }
                   token={ token }
                   setUser={ setUser }
+                  setAlert={ setAlert }
+                  setAlertMessage={ setAlertMessage }
                 /> 
               </Fragment>
             : <button 
@@ -64,6 +68,8 @@ const Dashboard = (props) => {
             setEditAPost={ setEditAPost }
             setEditPostObj={ setEditPostObj }
             token={ token }
+            setAlert={ setAlert }
+            setAlertMessage={ setAlertMessage }
           />
           <UserMessages posts={ posts } user={ user }/>
       </div>

@@ -19,7 +19,7 @@ const Alert = (props) => {
         className='small-btn'
         onClick={_ => setAlert(false)}
       >
-        x
+        X
       </button>
       <span>
         {

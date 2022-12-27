@@ -17,7 +17,7 @@ const Login = (props) => {
         const user = data.data;
         setIsUserLoggingIn(true)
         setUser(user);
-        setAlertMessage(`Successful login, have a good day ${loginUsername}.`)
+        setAlertMessage(`Successful login ${loginUsername}`)
         setAlert(true)
         window.localStorage.setItem('token', token);
         setWrongLogin(false);
@@ -49,7 +49,7 @@ const Login = (props) => {
     
     <div>
       <form 
-        className='login-form'
+        className='login-form flex-columns'
         onSubmit={ev => handleSubmit(ev)}
       >
         <h1>Welcome Stranger!</h1>

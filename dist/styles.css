@@ -21,16 +21,7 @@ body {
   color: var(--accentColor3);
   margin: 0; 
 }
-/* Flex columns. */
-  .post-info, .post-description,
- .login-form, .register-form,
-.dashboard, .post-search, .create-post,
-.dash-post-container, .dash-messages, 
-.single-post, .whole-post-message, .message-form{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+
 .flex-columns, body, .main-nav > a{
   display: flex;
   flex-direction: column;
@@ -210,7 +201,7 @@ margin: .5rem;
   margin: 1rem;
 }
 .dash-message{
-  width: 70vw;
+  width: 65vw;
   background-color: var(--secondaryColor);
   margin: .5rem;
   padding: .5rem;
@@ -225,9 +216,11 @@ margin: .5rem;
   justify-content: center;
   position: sticky;
   background-color: rgb(3, 126, 69);
-  bottom: 0;
-  margin-left: 40vw;
-  margin-right: 40vw;
+  border-radius: .5rem;
+  bottom: .5rem;
   width: 20vw;
   height: 7vh;
+  margin-left: 40vw;
+  margin-right: 40vw;
+  padding: .5rem 0 .5rem .5rem;
 }
