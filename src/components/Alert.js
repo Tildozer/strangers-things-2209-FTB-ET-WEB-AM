@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { BsPersonCheckFill } from 'react-icons/bs'
-import { BiMessageCheck } from 'react-icons/bi'
+import { BsPersonCheckFill } from 'react-icons/bs';
+import { BiMessageCheck } from 'react-icons/bi';
 
 const Alert = (props) => {
   const { setAlert, alertMessage, setAlertMessage, isUserLoggingIn, setIsUserLoggingIn } = props;
@@ -10,7 +10,7 @@ const Alert = (props) => {
     setAlert(false);
     setAlertMessage('');
     setIsUserLoggingIn(false);
-  }, 5000);
+  }, 4000);
   }, [])
 
   return (

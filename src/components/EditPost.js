@@ -11,7 +11,7 @@ const EditPost = (props) => {
 
     const navigate = useNavigate();
 
-    const handleSubmit = async ev => {
+    const handleSubmit = async (ev) => {
       ev.preventDefault();
       const deliver = ev.target[4].value;
       const newPost = {
@@ -47,38 +47,38 @@ const EditPost = (props) => {
       className='create-post'
       onSubmit={ev => handleSubmit(ev)}
     >
-        <div className='create-post-title'>Title :</div>
-          <input 
-            placeholder='Enter title...' 
-            value={ editTitle }
-            onChange={ ev => setEditTitle(ev.target.value) }
-          />
-        <div className='create-post-title description'>Description :</div>
-          <input
-            placeholder='Enter description...'
-            value={ editDescription }
-            onChange={ ev => setEditDescription(ev.target.value) }
-          />
-        <div className='create-post-title'>Price :</div>
-          <input 
-            placeholder='Enter price...'
-            value={ editPrice }
-            onChange={ ev => setEditPrice(ev.target.value) }
-          />
-        <div className='create-post-title'>Location :</div>
-          <input
-            placeholder='Enter location...'
-            value={ editLocation }
-            onChange={ev => setEditLocation(ev.target.value) }
-          />
-        <div>
-            Will deliver?
-        </div>
-        <select>
-            <option value={ false }>No</option>
-            <option value={ true }>Yes</option>
-        </select>
-        <button className='edit-button'>Edit post</button>
+      <div className='create-post-title'>Title :</div>
+        <input 
+          placeholder='Enter title...' 
+          value={ editTitle }
+          onChange={ ev => setEditTitle(ev.target.value) }
+        />
+      <div className='create-post-title description'>Description :</div>
+        <input
+          placeholder='Enter description...'
+          value={ editDescription }
+          onChange={ ev => setEditDescription(ev.target.value) }
+        />
+      <div className='create-post-title'>Price :</div>
+        <input 
+          placeholder='Enter price...'
+          value={ editPrice }
+          onChange={ ev => setEditPrice(ev.target.value) }
+        />
+      <div className='create-post-title'>Location :</div>
+        <input
+          placeholder='Enter location...'
+          value={ editLocation }
+          onChange={ev => setEditLocation(ev.target.value) }
+        />
+      <div>
+          Will deliver?
+      </div>
+      <select>
+          <option value={ false }>No</option>
+          <option value={ true }>Yes</option>
+      </select>
+      <button className='edit-button'>Edit post</button>
     </form>
   )
 }

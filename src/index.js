@@ -25,7 +25,7 @@ const App = ()=> {
   const [editPostObj, setEditPostObj] = useState({});
   const [alert, setAlert] = useState(false);
   const [isUserLoggingIn, setIsUserLoggingIn] = useState(false);
-  const [alertMessage, setAlertMessage] = useState('')
+  const [alertMessage, setAlertMessage] = useState('');
   
   const token = window.localStorage.getItem('token');
   const location = useLocation();
@@ -73,7 +73,6 @@ const App = ()=> {
               <Navigate to='/dashboard'/>
             : <Login
                 setUser={ setUser }
-                user={ user }
                 setIsUserLoggingIn={ setIsUserLoggingIn }
                 setAlert={ setAlert }
                 setAlertMessage={ setAlertMessage }
@@ -98,8 +97,8 @@ const App = ()=> {
             token ?
               <Dashboard
                 user={ user }
-                token={ token }
                 setUser={ setUser }
+                token={ token }
                 loggedIn={ loggedIn }
                 setEditAPost={ setEditAPost }
                 editAPost={ editAPost }
@@ -114,7 +113,7 @@ const App = ()=> {
         />
         <Route 
           path='/logout'
-          element={ <Logout /> }
+          element={ <Logout setAlert={ setAlert } /> }
         />
         {
           posts.length ?
@@ -143,19 +142,18 @@ const App = ()=> {
         }
       </Routes> 
      {
-      alert ? 
-        <Alert 
-          setAlert={ setAlert }
-          alertMessage={ alertMessage }
-          setAlertMessage={ setAlertMessage }
-          isUserLoggingIn={ isUserLoggingIn }
-          setIsUserLoggingIn={ setIsUserLoggingIn }
-        />
-      : null
+       alert ? 
+         <Alert 
+           setAlert={ setAlert }
+           alertMessage={ alertMessage }
+           setAlertMessage={ setAlertMessage }
+           isUserLoggingIn={ isUserLoggingIn }
+           setIsUserLoggingIn={ setIsUserLoggingIn }
+         />
+       : null
      }
     </div>
-
-  );
+  )
 };
 const root = ReactDOM.createRoot(document.querySelector('#root'));
 root.render(<HashRouter><App /></HashRouter>);

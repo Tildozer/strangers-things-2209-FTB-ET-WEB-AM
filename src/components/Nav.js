@@ -15,7 +15,7 @@ const Nav = (props) => {
 
       {
         token ?
-          <Link to='/logout' className="not-selected">LogOut</Link> 
+          <Link to='/logout' className="not-selected" >LogOut</Link> 
         : <Link to='/login' className={ pathName === '/login' ? 'selected' : 'not-selected' }>Login</Link>
       }
     </nav>

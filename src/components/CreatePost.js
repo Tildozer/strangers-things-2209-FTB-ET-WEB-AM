@@ -34,7 +34,7 @@ const CreatePost = (props) => {
   return (
     <form 
       className='create-post flex-columns'
-      onSubmit={ev => handlePostSubmit(ev)}
+      onSubmit={ ev => handlePostSubmit(ev) }
     >
         <div className='create-post-title'>Title :</div>
           <input 

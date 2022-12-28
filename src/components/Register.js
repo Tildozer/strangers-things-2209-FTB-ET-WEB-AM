@@ -24,7 +24,7 @@ const Register = (props) => {
       if(data.success){
         const token = data.data.token;
         setAlert(true);
-        setAlertMessage(` Thanks for joining Strangers Things, ${registerUsername}!`)
+        setAlertMessage(` Thanks for joining Strangers Things, ${registerUsername}!`);
         loggedIn(token);
         setUser(data.data);
         window.localStorage.setItem('token', token);

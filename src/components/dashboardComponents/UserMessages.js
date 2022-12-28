@@ -14,6 +14,7 @@ const UserMessages = (props) => {
       user.messages.length ?
         <Fragment>
           <h1 className='dashboard-title'>Messages for you:</h1>
+
           {
             activePostCheck.filter(message => message.fromUser.username !== user.username ).map(message => {
               return (
@@ -28,18 +29,19 @@ const UserMessages = (props) => {
               );
             })
           }
-            <h1 className='dashboard-title'>Messages from you:</h1>
+
+          <h1 className='dashboard-title'>Messages from you:</h1>
+
           {
-           activePostCheck.filter(message => message.fromUser.username === user.username ).map(message => {
+            activePostCheck.filter(message => message.fromUser.username === user.username ).map(message => {
               return (
                 <div key={message._id} className='dash-message'>
-                    <div>
-                      <h3>(Message from you..)</h3>
-                      <p>-{ message.content }</p>
-                    </div>
-                    <a className='link-post' href={`#/single-post/${message.post._id}`}>Message again: { message.post.title }</a>
+                  <div>
+                    <h3>(Message from you..)</h3>
+                    <p>-{ message.content }</p>
                   </div>
-         
+                  <a className='link-post' href={`#/single-post/${message.post._id}`}>Message again: { message.post.title }</a>
+                </div> 
               );
             })
           }

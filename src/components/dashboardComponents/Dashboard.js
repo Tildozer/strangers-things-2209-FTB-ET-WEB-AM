@@ -15,8 +15,9 @@ const Dashboard = (props) => {
   return (
     user._id ?
       <div className='dashboard flex-columns'>
-        <h1>Hello { user.username }! welcome back, please enjoy your time here! 
-          </h1>
+        <h1>
+          Hello { user.username }! welcome back, please enjoy your time here! 
+        </h1>
           {
             makeNewPost ?
               <Fragment>

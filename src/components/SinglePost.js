@@ -18,11 +18,11 @@ const SinglePost = (props) => {
       'message': {
         'content': message
       }
-    }
+    };
     sendPostMessage(singlePost._id, token, messageObj)
     .then(_ => {
       setAlert(true);
-      setAlertMessage(`Message sent on post: ${singlePost.title}`)
+      setAlertMessage(`Message sent on post: ${singlePost.title}`);
     })
     .then(_ => navigate('/dashboard'));
   };
@@ -45,9 +45,10 @@ const SinglePost = (props) => {
   };
 
   useEffect(() => {
+    setEditAPost(false);
     if(token){
       loggedIn(token)
-      .then(user => setUser(user))
+      .then(user => setUser(user));
     }
   }, [])
   
@@ -104,7 +105,7 @@ const SinglePost = (props) => {
     }
     {
       editAPost ?
-       <Fragment>
+        <Fragment>
           <button
             className='exit-make-post'
             onClick={_ => setEditAPost(false)}
@@ -119,9 +120,9 @@ const SinglePost = (props) => {
             setUser={ setUser }
             setAlert={ setAlert }
             setAlertMessage={ setAlertMessage }
-        /> 
-       </Fragment>
-     : null
+          /> 
+        </Fragment>
+      : null
     }
     </div>
   )

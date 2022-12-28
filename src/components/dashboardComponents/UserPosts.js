@@ -1,10 +1,8 @@
 import React, { Fragment } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { deletePost, loggedIn } from '../../api';
 
 const UserPosts = (props) => {
   const { user, setUser, editAPost, makeNewPost, setEditAPost, setEditPostObj, token, setAlert, setAlertMessage } = props;
-  const navigate = useNavigate();
 
   const handleDelete = async (post) => {
     return await deletePost(post._id, token)
@@ -14,7 +12,7 @@ const UserPosts = (props) => {
         setAlert(true);
         setAlertMessage(`${post.title} has been deleted.`);
       })
-      .catch(err => console.error(err))
+      .catch(err => console.error(err));
   };
 
   const handleEdit = (post) => {

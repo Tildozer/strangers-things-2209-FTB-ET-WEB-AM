@@ -18,6 +18,7 @@ const Posts = (props) => {
     navigate(`/single-post/${ post._id }`);
   }
 
+  // Used to search post as you are typing in your search.
   let postSearchFilter = posts.filter(post => post.description.toLowerCase().includes(searchPhrase.toLowerCase()) 
     || post.title.toLowerCase().includes(searchPhrase.toLowerCase()) 
     || post.location.toLowerCase().includes(searchPhrase.toLowerCase()) 
@@ -87,7 +88,6 @@ const Posts = (props) => {
                                   Send message
                                 </button>
                               </div>
-
                           : null
                         }
                     </div>
