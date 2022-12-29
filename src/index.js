@@ -107,6 +107,7 @@ const App = ()=> {
                 posts={ posts }
                 setAlert={ setAlert }
                 setAlertMessage={ setAlertMessage }
+                getPosts={ getPosts }
               />
             : <Navigate to='/login'/>
           }

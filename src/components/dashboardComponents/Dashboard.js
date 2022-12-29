@@ -2,7 +2,7 @@ import React, { useEffect, useState, Fragment } from 'react';
 import { CreatePost, EditPost, UserMessages, UserPosts } from '../index.js';
 
 const Dashboard = (props) => {
-  const { user, setUser, loggedIn, token, setEditAPost, editAPost, setEditPostObj, editPostObj, posts, setAlert, setAlertMessage } = props;
+  const { user, setUser, loggedIn, token, setEditAPost, editAPost, setEditPostObj, editPostObj, posts, setAlert, setAlertMessage, getPosts } = props;
   const [makeNewPost, setMakeNewPost] = useState(false);
 
 
@@ -10,6 +10,7 @@ const Dashboard = (props) => {
     loggedIn(token)
     .then(user => setUser(user));
     setEditAPost(false);
+    getPosts(token);
   }, [])
 
   return (
@@ -71,6 +72,7 @@ const Dashboard = (props) => {
             token={ token }
             setAlert={ setAlert }
             setAlertMessage={ setAlertMessage }
+            getPosts={ getPosts }
           />
           <UserMessages posts={ posts } user={ user }/>
       </div>

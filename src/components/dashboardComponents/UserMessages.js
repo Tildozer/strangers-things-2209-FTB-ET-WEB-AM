@@ -5,7 +5,7 @@ const UserMessages = (props) => {
 
   // filter out messages that are on post that are not avaible anymore. 
   const postsIds = posts.map(post => post._id);
-  const activePostCheck = user.messages.filter(message => postsIds.indexOf(message.post._id) !== -1)
+  const activePostCheck = user.messages.filter(message => postsIds.indexOf(message.post._id) !== -1);
 
   return (
     <div className='dash-messages flex-columns'>

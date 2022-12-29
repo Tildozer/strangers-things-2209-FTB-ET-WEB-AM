@@ -2,13 +2,14 @@ import React, { Fragment } from 'react';
 import { deletePost, loggedIn } from '../../api';
 
 const UserPosts = (props) => {
-  const { user, setUser, editAPost, makeNewPost, setEditAPost, setEditPostObj, token, setAlert, setAlertMessage } = props;
+  const { user, setUser, editAPost, makeNewPost, setEditAPost, setEditPostObj, token, setAlert, setAlertMessage, getPosts } = props;
 
   const handleDelete = async (post) => {
     return await deletePost(post._id, token)
       .then( _ => loggedIn(token))
       .then(data => {
         setUser(data);
+        getPosts(token);
         setAlert(true);
         setAlertMessage(`${post.title} has been deleted.`);
       })
