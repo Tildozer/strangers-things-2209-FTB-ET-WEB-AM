@@ -45,7 +45,7 @@ const UserMessages = (props) => {
               );
             })
           }
-          </Fragment>
+        </Fragment>
       : <h2>Sorry, you've got no messages at the moment.</h2>
     }
   </div>

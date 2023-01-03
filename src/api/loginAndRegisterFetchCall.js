@@ -1,6 +1,5 @@
 
 import React from "react";
-import { Navigate } from "react-router-dom";
 
 const MAIN_URL = `https://strangers-things.herokuapp.com/api/2209-FTB-ET-WEB-AM/`;
 
